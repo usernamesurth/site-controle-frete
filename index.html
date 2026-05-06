@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Frete</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="login" class="card">
+
+    <h2>🚛 Controle de Frete</h2>
+
+    <input type="email" id="user" placeholder="Email">
+
+    <input type="password" id="pass" placeholder="Senha">
+
+    <button onclick="login()">Entrar</button>
+
+    <button onclick="registrar()" class="criarConta">
+      Criar conta
+    </button>
+
+  </div>
+
+  <!-- APP -->
+  <div id="app" style="display:none;">
+
+    <h2>Dashboard</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        Frete: R$ <span id="totalFreteEl">0</span>
+      </div>
+
+      <div class="card">
+        Gastos: R$ <span id="totalGastoEl">0</span>
+      </div>
+
+      <div class="card destaque">
+        Lucro: R$ <span id="lucroEl">0</span>
+      </div>
+
+      <div class="card destaque">
+        Seu (50%): R$ <span id="metadeEl">0</span>
+      </div>
+
+    </div>
+
+    <!-- NOVA VIAGEM -->
+    <div class="card">
+
+      <h3>Nova Viagem</h3>
+
+      <input type="number" id="frete" placeholder="Frete">
+
+      <input type="number" id="gasto" placeholder="Combustível">
+
+      <input type="date" id="data">
+
+      <input type="text" id="cidade" placeholder="Cidade / Rota">
+
+      <button onclick="salvar()">Salvar</button>
+
+    </div>
+
+    <!-- HISTÓRICO -->
+    <div class="card">
+
+      <h3>Histórico</h3>
+
+      <ul id="lista"></ul>
+
+    </div>
+
+    <button onclick="logout()" class="logout">
+      Sair
+    </button>
+
+  </div>
+
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #1e1e2f;
+  color: white;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #2a2a40;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.destaque {
+  background: #4caf50;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: none;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.criarConta {
+  background: #2196f3;
+}
+
+.logout {
+  background: #e53935;
+}
+
+li {
+  list-style: none;
+  background: #3a3a5a;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+li button {
+  width: 48%;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+li button:first-child {
+  background: #2196f3;
+}
+
+li button:last-child {
+  background: #e53935;
+}
