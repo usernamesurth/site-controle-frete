@@ -256,3 +256,27 @@ window.onload = () => {
 
   document.getElementById("data").value = brasil;
 };
+// VALIDAR CIDADE DA LISTA
+document.getElementById("cidade").addEventListener("change", function () {
+
+  const inputCidade = this.value;
+
+  const opcoes =
+    document.querySelectorAll("#cidadesMG option");
+
+  let valido = false;
+
+  opcoes.forEach(option => {
+
+    if (option.value === inputCidade) {
+      valido = true;
+    }
+  });
+
+  if (!valido) {
+
+    alert("Selecione uma cidade válida da lista.");
+
+    this.value = "";
+  }
+});
