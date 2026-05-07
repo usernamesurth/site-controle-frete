@@ -300,3 +300,32 @@ select option{
   }
 
 }
+.salvar{
+  width:100%;
+  margin-top:25px;
+  background:linear-gradient(90deg,#19d86b,#13c45d);
+  border:none;
+  padding:18px;
+  border-radius:18px;
+  color:white;
+  font-size:22px;
+  font-weight:700;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+
+  transition:0.3s;
+}
+
+.salvar:hover{
+  transform:translateY(-3px);
+  opacity:0.92;
+  box-shadow:0 0 20px rgba(25,216,107,0.4);
+}
+
+.salvar i{
+  font-size:24px;
+}
