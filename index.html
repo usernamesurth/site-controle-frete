@@ -366,6 +366,28 @@
 
 </div>
 
+<!-- MODAL SUCESSO -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2><i class="fa-solid fa-check"></i> Sucesso</h2>
+    <p>Viagem salva com sucesso!</p>
+    <button onclick="fecharModal()">OK</button>
+  </div>
+</div>
+
+<!-- MODAL EXCLUIR -->
+<div id="modalExcluir" class="modal-overlay-delete">
+  <div class="modal-delete">
+    <i class="fa-solid fa-trash icon"></i>
+    <h2>Confirmar Exclusão</h2>
+    <p>Deseja realmente excluir esta viagem?</p>
+    <div class="modal-buttons">
+      <button class="btn-delete" id="btnConfirmarExcluir">Excluir</button>
+      <button class="btn-cancel" onclick="fecharModalExcluir()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 
