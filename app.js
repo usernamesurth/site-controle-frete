@@ -60,6 +60,26 @@ function fecharModalExcluir() {
 
 }
 
+function mostrarModalEditar(id) {
+
+  document.getElementById("modalEditar")
+  .style.display = "flex";
+
+  document.getElementById("btnSalvarEdicao")
+  .onclick = () => confirmarEdicao(id);
+
+  document.getElementById("editarFrete").value = "";
+  document.getElementById("editarGasto").value = "";
+
+}
+
+function fecharModalEditar() {
+
+  document.getElementById("modalEditar")
+  .style.display = "none";
+
+}
+
 // ======================================
 // LOGIN
 // ======================================
@@ -352,13 +372,21 @@ function confirmarExcluir(id) {
 
 function editarViagem(id) {
 
+  mostrarModalEditar(id);
+
+}
+
+function confirmarEdicao(id) {
+
   const novoFrete =
-    prompt("Novo valor do frete:");
+    Number(document.getElementById("editarFrete").value);
 
   const novoGasto =
-    prompt("Novo valor do gasto:");
+    Number(document.getElementById("editarGasto").value);
 
   if (!novoFrete || !novoGasto) {
+
+    alert("Preencha todos os campos.");
 
     return;
 
@@ -370,13 +398,15 @@ function editarViagem(id) {
 
     .update({
 
-      frete: Number(novoFrete),
+      frete: novoFrete,
 
-      gasto: Number(novoGasto)
+      gasto: novoGasto
 
     })
 
     .then(() => {
+
+      fecharModalEditar();
 
       carregarViagens();
 
