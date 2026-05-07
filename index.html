@@ -4,15 +4,20 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>🚛 Gamarano's Frete</title>
 
   <!-- ÍCONE -->
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="icon"
+        type="image/png"
+        href="logo.png">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+        href="style.css">
 
   <!-- FONT AWESOME -->
   <link rel="stylesheet"
@@ -25,17 +30,23 @@
 <div class="container">
 
   <!-- LOGIN -->
-  <div id="login" class="card">
+  <div id="login"
+       class="card">
 
     <h2>
       <i class="fa-solid fa-truck"></i>
       Controle de Frete
     </h2>
 
-    <input type="email" id="user" placeholder="Email">
+    <input type="email"
+           id="user"
+           placeholder="Email">
 
-    <input type="password" id="pass" placeholder="Senha">
+    <input type="password"
+           id="pass"
+           placeholder="Senha">
 
+    <!-- BOTÃO LOGIN -->
     <button type="button"
             class="loginBtn"
             onclick="login()">
@@ -48,7 +59,8 @@
   </div>
 
   <!-- APP -->
-  <div id="app" style="display:none;">
+  <div id="app"
+       style="display:none;">
 
     <!-- TOPO -->
     <div class="topo">
@@ -58,14 +70,20 @@
         <i class="fa-solid fa-truck-fast"></i>
 
         <div>
-          <h1>MEU <span>CAMINHÃO</span></h1>
+
+          <h1>
+            MEU <span>CAMINHÃO</span>
+          </h1>
+
           <p>Controle de Ganhos</p>
+
         </div>
 
       </div>
 
       <!-- SAIR -->
-      <button onclick="logout()" class="logout">
+      <button onclick="logout()"
+              class="logout">
 
         <i class="fa-solid fa-right-from-bracket"></i>
         Sair
@@ -82,33 +100,8 @@
         VIAGENS SALVAS
       </h2>
 
-      <ul id="lista">
-
-        <!-- EXEMPLO -->
-        <li>
-
-          <span>
-            Belo Horizonte - MG
-          </span>
-
-          <div class="acoes">
-
-            <button class="editar">
-              Editar
-            </button>
-
-            <button class="excluir"
-                    onclick="abrirModalExcluir('123')">
-
-              Excluir
-
-            </button>
-
-          </div>
-
-        </li>
-
-      </ul>
+      <!-- LISTA -->
+      <ul id="lista"></ul>
 
     </div>
 
@@ -117,7 +110,8 @@
 </div>
 
 <!-- MODAL SUCESSO -->
-<div id="modal" class="modal">
+<div id="modal"
+     class="modal">
 
   <div class="modal-content">
 
@@ -125,14 +119,17 @@
 
     <p>Viagem salva com sucesso!</p>
 
-    <button onclick="fecharModal()">OK</button>
+    <button onclick="fecharModal()">
+      OK
+    </button>
 
   </div>
 
 </div>
 
 <!-- MODAL EXCLUIR -->
-<div class="modal-overlay" id="modalExcluir">
+<div class="modal-overlay"
+     id="modalExcluir">
 
   <div class="modal-delete">
 
@@ -144,6 +141,7 @@
 
     <div class="modal-buttons">
 
+      <!-- EXCLUIR -->
       <button class="btn-delete"
               onclick="confirmarExclusao()">
 
@@ -151,6 +149,7 @@
 
       </button>
 
+      <!-- CANCELAR -->
       <button class="btn-cancel"
               onclick="fecharModalExcluir()">
 
@@ -166,41 +165,50 @@
 
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+<!-- APP -->
+<script src="app.js"></script>
+
+<!-- SCRIPT MODAL -->
 <script>
 
-let viagemId = null;
+  let viagemId = null;
 
-/* ABRIR MODAL */
-function abrirModalExcluir(id) {
+  /* ABRIR MODAL */
+  function abrirModalExcluir(id) {
 
-  viagemId = id;
+    viagemId = id;
 
-  document.getElementById("modalExcluir").style.display = "flex";
-}
-
-/* FECHAR MODAL */
-function fecharModalExcluir() {
-
-  document.getElementById("modalExcluir").style.display = "none";
-}
-
-/* CONFIRMAR EXCLUSÃO */
-function confirmarExclusao() {
-
-  // REMOVE ITEM DA TELA
-  const item = document.querySelector(`[data-id="${viagemId}"]`);
-
-  if(item){
-    item.remove();
+    document.getElementById("modalExcluir").style.display = "flex";
   }
 
-  alert("Viagem excluída com sucesso!");
+  /* FECHAR MODAL */
+  function fecharModalExcluir() {
 
-  fecharModalExcluir();
-}
+    document.getElementById("modalExcluir").style.display = "none";
+  }
+
+  /* CONFIRMAR EXCLUSÃO */
+  function confirmarExclusao() {
+
+    // PROCURA ITEM
+    const item = document.querySelector(`[data-id="${viagemId}"]`);
+
+    // REMOVE DA TELA
+    if (item) {
+      item.remove();
+    }
+
+    // FECHA MODAL
+    fecharModalExcluir();
+
+    // ALERTA
+    alert("Viagem excluída com sucesso!");
+  }
 
 </script>
 
