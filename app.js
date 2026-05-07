@@ -43,6 +43,23 @@ function fecharModal() {
 
 }
 
+function mostrarModalExcluir(id) {
+
+  document.getElementById("modalExcluir")
+  .style.display = "flex";
+
+  document.getElementById("btnConfirmarExcluir")
+  .onclick = () => confirmarExcluir(id);
+
+}
+
+function fecharModalExcluir() {
+
+  document.getElementById("modalExcluir")
+  .style.display = "none";
+
+}
+
 // ======================================
 // LOGIN
 // ======================================
@@ -307,10 +324,11 @@ function carregarViagens() {
 
 function excluirViagem(id) {
 
-  const confirmar =
-    confirm("Deseja excluir?");
+  mostrarModalExcluir(id);
 
-  if (!confirmar) return;
+}
+
+function confirmarExcluir(id) {
 
   db.collection("viagens")
 
@@ -319,6 +337,8 @@ function excluirViagem(id) {
     .delete()
 
     .then(() => {
+
+      fecharModalExcluir();
 
       carregarViagens();
 
