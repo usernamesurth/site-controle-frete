@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Gamarano's Frete </title>
 
-  <link rel="stylesheet" href="style.css">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>🚛 Gamarano's Frete</title>
+
+  <!-- ÍCONE DA ABA -->
+  <link rel="icon"
+        type="image/png"
+        href="logo.png">
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+        href="style.css">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
+
 <body>
 
 <div class="container">
@@ -14,39 +32,93 @@
   <!-- LOGIN -->
   <div id="login" class="card">
 
-    <h2><i class="fa-solid fa-truck"></i> Controle de Frete</h2>
+    <h2>
+      <i class="fa-solid fa-truck"></i>
+      Controle de Frete
+    </h2>
 
-    <input type="email" id="user" placeholder="Email">
+    <input type="email"
+           id="user"
+           placeholder="Email">
 
-    <input type="password" id="pass" placeholder="Senha">
+    <input type="password"
+           id="pass"
+           placeholder="Senha">
 
-    <button onclick="login()">Entrar</button>
+    <button onclick="login()">
 
-    <link rel="icon" type="image/png" href="logo.png">
+      <i class="fa-solid fa-right-to-bracket"></i>
+
+      Entrar
+
+    </button>
 
   </div>
 
   <!-- APP -->
   <div id="app" style="display:none;">
 
-    <h2>Dashboard</h2>
+    <h2>
 
+      <i class="fa-solid fa-chart-line"></i>
+
+      Dashboard
+
+    </h2>
+
+    <!-- CARDS -->
     <div class="cards">
 
       <div class="card">
-        Frete: R$ <span id="totalFreteEl">0</span>
+
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+
+        <h3>Frete</h3>
+
+        <p>
+          R$
+          <span id="totalFreteEl">0</span>
+        </p>
+
       </div>
 
       <div class="card">
-        Gastos: R$ <span id="totalGastoEl">0</span>
+
+        <i class="fa-solid fa-gas-pump"></i>
+
+        <h3>Gastos</h3>
+
+        <p>
+          R$
+          <span id="totalGastoEl">0</span>
+        </p>
+
       </div>
 
       <div class="card destaque">
-        Lucro: R$ <span id="lucroEl">0</span>
+
+        <i class="fa-solid fa-sack-dollar"></i>
+
+        <h3>Lucro</h3>
+
+        <p>
+          R$
+          <span id="lucroEl">0</span>
+        </p>
+
       </div>
 
       <div class="card destaque">
-        Seu (50%): R$ <span id="metadeEl">0</span>
+
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+
+        <h3>Seu 50%</h3>
+
+        <p>
+          R$
+          <span id="metadeEl">0</span>
+        </p>
+
       </div>
 
     </div>
@@ -54,274 +126,136 @@
     <!-- NOVA VIAGEM -->
     <div class="card">
 
-      <h3>Nova Viagem</h3>
+      <h3>
 
-<div class="inputBox">
-  <span>R$</span>
-  <input type="number" id="frete" placeholder="Valor do frete">
-</div>
+        <i class="fa-solid fa-road"></i>
 
-<div class="inputBox">
-  <span>R$</span>
-  <input type="number" id="gasto" placeholder="Combustível">
-</div>
+        Nova Viagem
 
-      <input type="date" id="data" readonly>
+      </h3>
 
-<input list="cidadesMG" id="cidade" placeholder="Cidade">
+      <!-- FRETE -->
+      <label>
 
-<datalist id="cidadesMG">
+        <i class="fa-solid fa-money-bill-wave"></i>
 
-  <option value="Abadia dos Dourados - MG">
-  <option value="Abaeté - MG">
-  <option value="Abre Campo - MG">
-  <option value="Acaiaca - MG">
-  <option value="Açucena - MG">
-  <option value="Água Boa - MG">
-  <option value="Água Comprida - MG">
-  <option value="Aguanil - MG">
-  <option value="Águas Formosas - MG">
-  <option value="Águas Vermelhas - MG">
-  <option value="Aimorés - MG">
-  <option value="Aiuruoca - MG">
-  <option value="Alagoa - MG">
-  <option value="Albertina - MG">
-  <option value="Além Paraíba - MG">
-  <option value="Alfenas - MG">
-  <option value="Alfredo Vasconcelos - MG">
-  <option value="Almenara - MG">
-  <option value="Alpercata - MG">
-  <option value="Alpinópolis - MG">
-  <option value="Alterosa - MG">
-  <option value="Alto Caparaó - MG">
-  <option value="Alto Jequitibá - MG">
-  <option value="Alto Rio Doce - MG">
-  <option value="Alvarenga - MG">
-  <option value="Alvinópolis - MG">
-  <option value="Alvorada de Minas - MG">
-  <option value="Amparo da Serra - MG">
-  <option value="Andradas - MG">
-  <option value="Andrelândia - MG">
-  <option value="Angelândia - MG">
-  <option value="Antônio Carlos - MG">
-  <option value="Antônio Dias - MG">
-  <option value="Antônio Prado de Minas - MG">
-  <option value="Araçaí - MG">
-  <option value="Aracitaba - MG">
-  <option value="Araçuaí - MG">
-  <option value="Araguari - MG">
-  <option value="Arantina - MG">
-  <option value="Araponga - MG">
-  <option value="Araporã - MG">
-  <option value="Arapuá - MG">
-  <option value="Araújos - MG">
-  <option value="Araxá - MG">
-  <option value="Arceburgo - MG">
-  <option value="Arcos - MG">
-  <option value="Areado - MG">
-  <option value="Argirita - MG">
-  <option value="Aricanduva - MG">
-  <option value="Arinos - MG">
-  <option value="Astolfo Dutra - MG">
-  <option value="Ataléia - MG">
-  <option value="Augusto de Lima - MG">
-  <option value="Baependi - MG">
-  <option value="Baldim - MG">
-  <option value="Bambuí - MG">
-  <option value="Bandeira - MG">
-  <option value="Bandeira do Sul - MG">
-  <option value="Barão de Cocais - MG">
-  <option value="Barão de Monte Alto - MG">
-  <option value="Barbacena - MG">
-  <option value="Barra Longa - MG">
-  <option value="Barroso - MG">
-  <option value="Bela Vista de Minas - MG">
-  <option value="Belmiro Braga - MG">
-  <option value="Belo Horizonte - MG">
-  <option value="Belo Oriente - MG">
-  <option value="Belo Vale - MG">
-  <option value="Berilo - MG">
-  <option value="Berizal - MG">
-  <option value="Bertópolis - MG">
-  <option value="Betim - MG">
-  <option value="Bias Fortes - MG">
-  <option value="Bicas - MG">
-  <option value="Biquinhas - MG">
-  <option value="Boa Esperança - MG">
-  <option value="Bocaina de Minas - MG">
-  <option value="Bocaiúva - MG">
-  <option value="Bom Despacho - MG">
-  <option value="Bom Jardim de Minas - MG">
-  <option value="Bom Jesus da Penha - MG">
-  <option value="Bom Jesus do Amparo - MG">
-  <option value="Bom Jesus do Galho - MG">
-  <option value="Bom Repouso - MG">
-  <option value="Bom Sucesso - MG">
-  <option value="Bonfim - MG">
-  <option value="Bonfinópolis de Minas - MG">
-  <option value="Bonito de Minas - MG">
-  <option value="Borda da Mata - MG">
-  <option value="Botelhos - MG">
-  <option value="Botumirim - MG">
-  <option value="Brás Pires - MG">
-  <option value="Brasilândia de Minas - MG">
-  <option value="Brasília de Minas - MG">
-  <option value="Brumadinho - MG">
-  <option value="Bueno Brandão - MG">
-  <option value="Buenópolis - MG">
-  <option value="Bugre - MG">
-  <option value="Buritis - MG">
-  <option value="Buritizeiro - MG">
-  <option value="Cabeceira Grande - MG">
-  <option value="Cabo Verde - MG">
-  <option value="Cachoeira da Prata - MG">
-  <option value="Cachoeira de Minas - MG">
-  <option value="Cachoeira de Pajeú - MG">
-  <option value="Cachoeira Dourada - MG">
-  <option value="Caetanópolis - MG">
-  <option value="Caeté - MG">
-  <option value="Caiana - MG">
-  <option value="Cajuri - MG">
-  <option value="Caldas - MG">
-  <option value="Camacho - MG">
-  <option value="Camanducaia - MG">
-  <option value="Cambuí - MG">
-  <option value="Cambuquira - MG">
-  <option value="Campanário - MG">
-  <option value="Campanha - MG">
-  <option value="Campestre - MG">
-  <option value="Campina Verde - MG">
-  <option value="Campo Azul - MG">
-  <option value="Campo Belo - MG">
-  <option value="Campo do Meio - MG">
-  <option value="Campo Florido - MG">
-  <option value="Campos Altos - MG">
-  <option value="Campos Gerais - MG">
-  <option value="Cana Verde - MG">
-  <option value="Canaã - MG">
-  <option value="Canápolis - MG">
-  <option value="Candeias - MG">
-  <option value="Cantagalo - MG">
-  <option value="Caparaó - MG">
-  <option value="Capela Nova - MG">
-  <option value="Capelinha - MG">
-  <option value="Capetinga - MG">
-  <option value="Capim Branco - MG">
-  <option value="Capinópolis - MG">
-  <option value="Capitão Andrade - MG">
-  <option value="Capitão Enéas - MG">
-  <option value="Capitólio - MG">
-  <option value="Caputira - MG">
-  <option value="Caraí - MG">
-  <option value="Caranaíba - MG">
-  <option value="Carandaí - MG">
-  <option value="Carangola - MG">
-  <option value="Caratinga - MG">
-  <option value="Carbonita - MG">
-  <option value="Careaçu - MG">
-  <option value="Carlos Chagas - MG">
-  <option value="Carmésia - MG">
-  <option value="Carmo da Cachoeira - MG">
-  <option value="Carmo da Mata - MG">
-  <option value="Carmo de Minas - MG">
-  <option value="Carmo do Cajuru - MG">
-  <option value="Carmo do Paranaíba - MG">
-  <option value="Carmo do Rio Claro - MG">
-  <option value="Carmópolis de Minas - MG">
-  <option value="Carneirinho - MG">
-  <option value="Carrancas - MG">
-  <option value="Carvalhópolis - MG">
-  <option value="Carvalhos - MG">
-  <option value="Casa Grande - MG">
-  <option value="Cascalho Rico - MG">
-  <option value="Cássia - MG">
-  <option value="Cataguases - MG">
-  <option value="Catas Altas - MG">
-  <option value="Catas Altas da Noruega - MG">
-  <option value="Catuji - MG">
-  <option value="Catuti - MG">
-  <option value="Caxambu - MG">
-  <option value="Cedro do Abaeté - MG">
-  <option value="Central de Minas - MG">
-  <option value="Centralina - MG">
-  <option value="Chácara - MG">
-  <option value="Chalé - MG">
-  <option value="Chapada do Norte - MG">
-  <option value="Chapada Gaúcha - MG">
-  <option value="Chiador - MG">
-  <option value="Cláudio - MG">
-  <option value="Coimbra - MG">
-  <option value="Coluna - MG">
-  <option value="Conceição da Aparecida - MG">
-  <option value="Conceição das Alagoas - MG">
-  <option value="Conceição do Mato Dentro - MG">
-  <option value="Congonhas - MG">
-  <option value="Conselheiro Lafaiete - MG">
-  <option value="Contagem - MG">
-  <option value="Coronel Fabriciano - MG">
-  <option value="Curvelo - MG">
-  <option value="Diamantina - MG">
-  <option value="Divinópolis - MG">
-  <option value="Formiga - MG">
-  <option value="Frutal - MG">
-  <option value="Governador Valadares - MG">
-  <option value="Ipatinga - MG">
-  <option value="Itabira - MG">
-  <option value="Itajubá - MG">
-  <option value="Ituiutaba - MG">
-  <option value="João Monlevade - MG">
-  <option value="Juiz de Fora - MG">
-  <option value="Lagoa Santa - MG">
-  <option value="Lavras - MG">
-  <option value="Manhuaçu - MG">
-  <option value="Mariana - MG">
-  <option value="Montes Claros - MG">
-  <option value="Muriaé - MG">
-  <option value="Nova Lima - MG">
-  <option value="Ouro Branco - MG">
-  <option value="Ouro Preto - MG">
-  <option value="Pará de Minas - MG">
-  <option value="Paracatu - MG">
-  <option value="Passos - MG">
-  <option value="Patos de Minas - MG">
-  <option value="Patrocínio - MG">
-  <option value="Pedro Leopoldo - MG">
-  <option value="Pirapora - MG">
-  <option value="Poços de Caldas - MG">
-  <option value="Ponte Nova - MG">
-  <option value="Pouso Alegre - MG">
-  <option value="Ribeirão das Neves - MG">
-  <option value="Sabará - MG">
-  <option value="Santa Luzia - MG">
-  <option value="São João del-Rei - MG">
-  <option value="São Lourenço - MG">
-  <option value="Sete Lagoas - MG">
-  <option value="Teófilo Otoni - MG">
-  <option value="Timóteo - MG">
-  <option value="Três Corações - MG">
-  <option value="Ubá - MG">
-  <option value="Uberaba - MG">
-  <option value="Uberlândia - MG">
-  <option value="Unaí - MG">
-  <option value="Varginha - MG">
-  <option value="Viçosa - MG">
+        Valor do Frete
 
-</datalist>
-      <button onclick="salvar()">Salvar</button>
+      </label>
+
+      <div class="inputBox">
+
+        <span>R$</span>
+
+        <input type="number"
+               id="frete"
+               placeholder="0,00">
+
+      </div>
+
+      <!-- COMBUSTÍVEL -->
+      <label>
+
+        <i class="fa-solid fa-gas-pump"></i>
+
+        Combustível
+
+      </label>
+
+      <div class="inputBox">
+
+        <span>R$</span>
+
+        <input type="number"
+               id="gasto"
+               placeholder="0,00">
+
+      </div>
+
+      <!-- DATA -->
+      <label>
+
+        <i class="fa-solid fa-calendar-days"></i>
+
+        Data
+
+      </label>
+
+      <input type="date"
+             id="data"
+             readonly>
+
+      <!-- CIDADE -->
+      <label>
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        Cidade
+
+      </label>
+
+      <input list="cidadesMG"
+             id="cidade"
+             placeholder="Cidade">
+
+      <datalist id="cidadesMG">
+
+        <option value="Belo Horizonte - MG">
+        <option value="Uberlândia - MG">
+        <option value="Contagem - MG">
+        <option value="Juiz de Fora - MG">
+        <option value="Betim - MG">
+        <option value="Montes Claros - MG">
+        <option value="Uberaba - MG">
+        <option value="Governador Valadares - MG">
+        <option value="Ipatinga - MG">
+        <option value="Sete Lagoas - MG">
+        <option value="Divinópolis - MG">
+        <option value="Poços de Caldas - MG">
+        <option value="Pouso Alegre - MG">
+        <option value="Patos de Minas - MG">
+        <option value="Barbacena - MG">
+        <option value="Ouro Preto - MG">
+        <option value="Mariana - MG">
+        <option value="Conselheiro Lafaiete - MG">
+        <option value="Lavras - MG">
+        <option value="Varginha - MG">
+
+      </datalist>
+
+      <!-- BOTÃO -->
+      <button onclick="salvar()">
+
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Salvar Viagem
+
+      </button>
 
     </div>
 
     <!-- HISTÓRICO -->
     <div class="card">
 
-      <h3>Histórico</h3>
+      <h3>
+
+        <i class="fa-solid fa-clock-rotate-left"></i>
+
+        Histórico
+
+      </h3>
 
       <ul id="lista"></ul>
 
     </div>
 
+    <!-- SAIR -->
     <button onclick="logout()" class="logout">
+
+      <i class="fa-solid fa-right-from-bracket"></i>
+
       Sair
+
     </button>
 
   </div>
@@ -335,6 +269,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+<!-- APP -->
 <script src="app.js"></script>
 
 </body>
