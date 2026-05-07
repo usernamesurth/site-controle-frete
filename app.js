@@ -1,4 +1,4 @@
-// CONFIG FIREBASE
+// FIREBASE
 const firebaseConfig = {
 
   apiKey: "AIzaSyAfF2l99nBaB3xP-Aj2C0LEJE0-05lufi8",
@@ -15,20 +15,14 @@ const firebaseConfig = {
 
 };
 
-
-
-
-// INICIAR FIREBASE
+// INICIAR
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
 const db = firebase.firestore();
 
-// ===============================
 // LOGIN
-// ===============================
-
 function login() {
 
   const email =
@@ -60,12 +54,8 @@ function login() {
     });
 
 }
-}
 
-// ===============================
 // LOGOUT
-// ===============================
-
 function logout() {
 
   auth.signOut()
@@ -78,10 +68,7 @@ function logout() {
 
 }
 
-// ===============================
 // VERIFICAR LOGIN
-// ===============================
-
 auth.onAuthStateChanged((user) => {
 
   if (user) {
@@ -98,27 +85,13 @@ auth.onAuthStateChanged((user) => {
 
 });
 
-// ===============================
-// DATA BRASIL
-// ===============================
-
+// DATA
 const hoje = new Date();
 
-const dataBrasil =
-  hoje.toLocaleDateString("en-CA", {
+document.getElementById("data").value =
+hoje.toISOString().split("T")[0];
 
-    timeZone:
-    "America/Sao_Paulo"
-
-  });
-
-document.getElementById("data")
-.value = dataBrasil;
-
-// ===============================
-// SALVAR VIAGEM
-// ===============================
-
+// SALVAR
 function salvar() {
 
   const cidade =
@@ -133,59 +106,39 @@ function salvar() {
   const data =
     document.getElementById("data").value;
 
-  // VALIDAÇÃO
   if (!cidade || !frete || !gasto) {
 
-    alert("Preencha todos os campos.");
+    alert("Preencha tudo.");
 
     return;
 
   }
 
-  // SALVAR FIREBASE
   db.collection("viagens").add({
 
-    cidade: cidade,
-
-    frete: frete,
-
-    gasto: gasto,
-
-    data: data,
-
+    cidade,
+    frete,
+    gasto,
+    data,
     criadoEm: new Date()
 
   })
 
   .then(() => {
 
-    alert("Viagem salva!");
-
-    // LIMPAR CAMPOS
-    document.getElementById("cidade").value = "";
+    carregarViagens();
 
     document.getElementById("frete").value = "";
 
     document.getElementById("gasto").value = "";
 
-    carregarViagens();
-
-  })
-
-  .catch((error) => {
-
-    console.log(error);
-
-    alert("Erro ao salvar.");
+    document.getElementById("cidade").value = "";
 
   });
 
 }
 
-// ===============================
-// CARREGAR VIAGENS
-// ===============================
-
+// CARREGAR
 function carregarViagens() {
 
   const lista =
@@ -207,79 +160,38 @@ function carregarViagens() {
 
       snapshot.forEach((doc) => {
 
-        const viagem = doc.data();
+        const v = doc.data();
 
         const lucro =
-          viagem.frete - viagem.gasto;
+          v.frete - v.gasto;
 
-        totalFrete += viagem.frete;
+        totalFrete += v.frete;
 
-        totalGasto += viagem.gasto;
+        totalGasto += v.gasto;
 
         lista.innerHTML += `
 
         <div class="viagem">
 
-          <div class="viagemTop">
+          <h3>${v.cidade}</h3>
 
-            <div class="viagemInfo">
+          <p>📅 ${v.data}</p>
 
-              <h3>
+          <p>Frete: R$ ${v.frete}</p>
 
-                ${viagem.cidade}
+          <p>Gasto: R$ ${v.gasto}</p>
 
-              </h3>
-
-              <p>
-
-                📅 ${viagem.data}
-
-              </p>
-
-            </div>
-
-            <div class="valores">
-
-              <p class="azulTexto">
-
-                Frete:
-                R$ ${viagem.frete.toFixed(2)}
-
-              </p>
-
-              <p class="vermelhoTexto">
-
-                Gasto:
-                R$ ${viagem.gasto.toFixed(2)}
-
-              </p>
-
-              <p class="verdeTexto">
-
-                Lucro:
-                R$ ${lucro.toFixed(2)}
-
-              </p>
-
-            </div>
-
-          </div>
+          <p>Lucro: R$ ${lucro}</p>
 
           <div class="botoes">
 
-            <button class="editar"
-              onclick="editarViagem('${doc.id}')">
-
-              <i class="fa-solid fa-pen"></i>
+            <button onclick="editarViagem('${doc.id}')">
 
               Editar
 
             </button>
 
-            <button class="excluir"
-              onclick="excluirViagem('${doc.id}')">
-
-              <i class="fa-solid fa-trash"></i>
+            <button onclick="excluirViagem('${doc.id}')">
 
               Excluir
 
@@ -293,39 +205,22 @@ function carregarViagens() {
 
       });
 
-      // TOTAIS
-      const lucroTotal =
-        totalFrete - totalGasto;
+      document.getElementById("totalFreteEl")
+      .innerText = totalFrete.toFixed(2);
 
-      document.getElementById(
-        "totalFreteEl"
-      ).innerText =
-        totalFrete.toFixed(2);
+      document.getElementById("totalGastoEl")
+      .innerText = totalGasto.toFixed(2);
 
-      document.getElementById(
-        "totalGastoEl"
-      ).innerText =
-        totalGasto.toFixed(2);
-
-      document.getElementById(
-        "lucroEl"
-      ).innerText =
-        lucroTotal.toFixed(2);
+      document.getElementById("lucroEl")
+      .innerText =
+      (totalFrete - totalGasto).toFixed(2);
 
     });
 
 }
 
-// ===============================
 // EXCLUIR
-// ===============================
-
 function excluirViagem(id) {
-
-  const confirmar =
-    confirm("Excluir viagem?");
-
-  if (!confirmar) return;
 
   db.collection("viagens")
 
@@ -341,23 +236,14 @@ function excluirViagem(id) {
 
 }
 
-// ===============================
 // EDITAR
-// ===============================
-
 function editarViagem(id) {
 
-  const novoFrete =
-    prompt("Novo valor do frete:");
+  const frete =
+    prompt("Novo frete:");
 
-  const novoGasto =
-    prompt("Novo valor do gasto:");
-
-  if (!novoFrete || !novoGasto) {
-
-    return;
-
-  }
+  const gasto =
+    prompt("Novo gasto:");
 
   db.collection("viagens")
 
@@ -365,9 +251,9 @@ function editarViagem(id) {
 
     .update({
 
-      frete: Number(novoFrete),
+      frete: Number(frete),
 
-      gasto: Number(novoGasto)
+      gasto: Number(gasto)
 
     })
 
@@ -378,8 +264,5 @@ function editarViagem(id) {
     });
 
 }
-firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
-
-const db = firebase.firestore();
+console.log("APP FUNCIONANDO");
