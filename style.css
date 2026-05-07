@@ -1,145 +1,302 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* ===== GOOGLE FONT ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  background: #0f172a;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  min-height: 100vh;
+/* ===== BODY ===== */
+body{
+  font-family:'Poppins', sans-serif;
+  background:
+  radial-gradient(circle at top, #0b2c68 0%, #050816 45%, #02040c 100%);
+  color:white;
+  min-height:100vh;
+  padding:20px;
 }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:auto;
 }
 
-h2, h3 {
-  margin-bottom: 15px;
-  font-weight: 600;
+/* ===== HEADER ===== */
+.topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
 }
 
-.card {
-  background: #1e293b;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+.logoArea{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+.logoArea i{
+  font-size:45px;
+  color:#1cff72;
 }
 
-.cards .card {
-  text-align: center;
-  padding: 25px 15px;
+.logoArea h1{
+  font-size:38px;
+  font-weight:700;
 }
 
-.destaque {
-  background: linear-gradient(135deg, #16a34a, #22c55e);
+.logoArea span{
+  color:#1cff72;
+}
+
+.logoArea p{
+  color:#aeb7d0;
+  margin-top:-5px;
+}
+
+/* ===== BOTÃO SAIR ===== */
+.logout{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  color:#ff5d5d;
+  padding:15px 30px;
+  border-radius:50px;
+  cursor:pointer;
+  font-size:18px;
+  transition:0.3s;
+}
+
+.logout:hover{
+  background:#ff5d5d;
+  color:white;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.card{
+  border-radius:25px;
+  padding:25px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+
+.card i{
+  font-size:25px;
+  margin-bottom:20px;
+}
+
+.card h3{
+  font-size:20px;
+  color:#dbe3ff;
+  margin-bottom:15px;
+}
+
+.card h2{
+  font-size:42px;
+  margin-bottom:5px;
+}
+
+.card p{
+  color:#b9c2da;
+}
+
+/* ===== CORES DOS CARDS ===== */
+.verde{
+  background:linear-gradient(135deg,#063b2c,#0f7a52);
+}
+
+.azul{
+  background:linear-gradient(135deg,#123b88,#1853c6);
+}
+
+.roxo{
+  background:linear-gradient(135deg,#47218f,#7c3aed);
+}
+
+/* ===== BOX ===== */
+.box{
+  background:rgba(4,10,25,0.65);
+  border-radius:30px;
+  padding:30px;
+  margin-bottom:30px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 0 30px rgba(0,0,0,0.4);
+}
+
+/* ===== TITULOS ===== */
+.box h2{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:25px;
+  font-size:32px;
+}
+
+/* ===== FORM ===== */
+.formGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.inputGroup{
+  width:100%;
+}
+
+.inputGroup label{
+  display:block;
+  margin-bottom:10px;
+  color:#cbd5e1;
+  font-size:15px;
+}
+
+.inputBox{
+  display:flex;
+  align-items:center;
+  background:#071224;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.inputBox span{
+  background:#0a8f57;
+  color:#77ffbf;
+  padding:16px;
+  font-weight:bold;
+  font-size:18px;
 }
 
 input,
-select {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  margin-top: 10px;
-  background: #334155;
-  color: white;
-  font-size: 15px;
+select{
+  width:100%;
+  background:transparent;
+  border:none;
+  outline:none;
+  padding:16px;
+  color:white;
+  font-size:16px;
 }
 
-input::placeholder {
-  color: #cbd5e1;
+select option{
+  color:black;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  margin-top: 12px;
-  background: #22c55e;
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+/* ===== BOTÃO ===== */
+.salvar{
+  width:100%;
+  margin-top:25px;
+  background:linear-gradient(90deg,#18d46b,#19b95d);
+  border:none;
+  padding:18px;
+  border-radius:18px;
+  color:white;
+  font-size:20px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-button:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
+.salvar:hover{
+  transform:translateY(-3px);
+  opacity:0.9;
 }
 
-.criarConta {
-  background: #3b82f6;
+/* ===== HISTÓRICO ===== */
+.viagem{
+  background:#071224;
+  border-radius:25px;
+  padding:25px;
+  margin-top:20px;
+  border:1px solid rgba(255,255,255,0.06);
 }
 
-.logout {
-  background: #ef4444;
+.viagemTop{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
-.inputBox {
-  display: flex;
-  align-items: center;
-  background: #334155;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-top: 10px;
+.viagemInfo h3{
+  font-size:28px;
+  margin-bottom:10px;
 }
 
-.inputBox span {
-  padding: 14px;
-  background: #475569;
-  font-weight: bold;
+.viagemInfo p{
+  color:#cbd5e1;
+  margin-bottom:6px;
 }
 
-.inputBox input {
-  margin: 0;
-  background: transparent;
+.valores p{
+  font-size:20px;
+  margin-bottom:10px;
 }
 
-ul {
-  padding: 0;
+.azulTexto{
+  color:#3b82f6;
 }
 
-li {
-  list-style: none;
-  background: #334155;
-  padding: 15px;
-  border-radius: 15px;
-  margin-top: 12px;
-  line-height: 1.8;
+.vermelhoTexto{
+  color:#ff5d5d;
 }
 
-li button {
-  width: 48%;
-  margin-top: 10px;
+.verdeTexto{
+  color:#1cff72;
 }
 
-li button:first-child {
-  background: #3b82f6;
+/* ===== BOTÕES ===== */
+.botoes{
+  display:flex;
+  gap:15px;
+  margin-top:20px;
 }
 
-li button:last-child {
-  background: #ef4444;
+.editar{
+  flex:1;
+  background:#2563eb;
+  border:none;
+  padding:14px;
+  border-radius:15px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
 }
 
-@media (max-width: 600px) {
+.excluir{
+  flex:1;
+  background:#dc2626;
+  border:none;
+  padding:14px;
+  border-radius:15px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
 
-  .cards {
-    grid-template-columns: 1fr;
+/* ===== RESPONSIVO ===== */
+@media(max-width:700px){
+
+  .formGrid{
+    grid-template-columns:1fr;
+  }
+
+  .logoArea h1{
+    font-size:28px;
+  }
+
+  .card h2{
+    font-size:30px;
   }
 
 }
