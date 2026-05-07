@@ -2,7 +2,7 @@
 // FIREBASE
 // ======================================
 
-const firebaseConfig = {
+ const firebaseConfig = {
 
   apiKey: "AIzaSyAfF2l99nBaB3xP-Aj2C0LEJE0-05lufi8",
 
@@ -15,6 +15,8 @@ const firebaseConfig = {
   messagingSenderId: "900483850217",
 
   appId: "1:900483850217:web:1b83a89ceac9747fbab578"
+
+};
 
 // INICIAR FIREBASE
 firebase.initializeApp(firebaseConfig);
