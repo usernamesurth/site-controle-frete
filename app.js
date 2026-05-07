@@ -16,8 +16,6 @@ const firebaseConfig = {
 
   appId: "1:900483850217:web:1b83a89ceac9747fbab578"
 
-};
-
 // INICIAR FIREBASE
 firebase.initializeApp(firebaseConfig);
 
@@ -58,6 +56,7 @@ function login() {
     });
 
 }
+
 // ======================================
 // LOGOUT
 // ======================================
@@ -102,6 +101,24 @@ const hoje = new Date();
 
 document.getElementById("data").value =
 hoje.toISOString().split("T")[0];
+
+// ======================================
+// MODAL
+// ======================================
+
+function mostrarModal() {
+
+  document.getElementById("modal")
+  .style.display = "flex";
+
+}
+
+function fecharModal() {
+
+  document.getElementById("modal")
+  .style.display = "none";
+
+}
 
 // ======================================
 // SALVAR VIAGEM
@@ -151,14 +168,17 @@ function salvar() {
 
   .then(() => {
 
-    alert("Viagem salva!");
+    // ABRIR MODAL
+    mostrarModal();
 
+    // LIMPAR CAMPOS
     document.getElementById("cidade").value = "";
 
     document.getElementById("frete").value = "";
 
     document.getElementById("gasto").value = "";
 
+    // RECARREGAR VIAGENS
     carregarViagens();
 
   })
@@ -226,24 +246,18 @@ function carregarViagens() {
             <div class="valores">
 
               <p class="azulTexto">
-
                 Frete:
                 R$ ${v.frete.toFixed(2)}
-
               </p>
 
               <p class="vermelhoTexto">
-
                 Gasto:
                 R$ ${v.gasto.toFixed(2)}
-
               </p>
 
               <p class="verdeTexto">
-
                 Lucro:
                 R$ ${lucro.toFixed(2)}
-
               </p>
 
             </div>
@@ -363,11 +377,3 @@ function editarViagem(id) {
 }
 
 console.log("APP FUNCIONANDO");
-
-function mostrarModal() {
-  document.getElementById("modal").style.display = "flex";
-}
-
-function fecharModal() {
-  document.getElementById("modal").style.display = "none";
-}
