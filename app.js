@@ -37,9 +37,13 @@ function login() {
   const senha =
     document.getElementById("pass").value;
 
+  console.log("Tentando login...");
+
   auth.signInWithEmailAndPassword(email, senha)
 
-    .then(() => {
+    .then((userCredential) => {
+
+      console.log("LOGIN OK");
 
       document.getElementById("login")
       .style.display = "none";
@@ -60,7 +64,6 @@ function login() {
     });
 
 }
-
 // ======================================
 // LOGOUT
 // ======================================
