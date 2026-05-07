@@ -37,21 +37,15 @@ function login() {
   const senha =
     document.getElementById("pass").value;
 
-  console.log("Tentando login...");
-
   auth.signInWithEmailAndPassword(email, senha)
 
-    .then((userCredential) => {
-
-      console.log("LOGIN OK");
+    .then(() => {
 
       document.getElementById("login")
       .style.display = "none";
 
       document.getElementById("app")
       .style.display = "block";
-
-      carregarViagens();
 
     })
 
