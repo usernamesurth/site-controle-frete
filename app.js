@@ -280,3 +280,11 @@ document.getElementById("cidade").addEventListener("change", function () {
     this.value = "";
   }
 });
+
+  if (!valido) {
+
+    alert("Selecione uma cidade válida da lista.");
+
+    this.value = "";
+  }
+});
