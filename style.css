@@ -10,42 +10,60 @@
 
 /* ===== BODY ===== */
 body{
+
   font-family:'Poppins', sans-serif;
+
   background:
-  radial-gradient(circle at top, #0b2c68 0%, #050816 45%, #02040c 100%);
+  radial-gradient(circle at top,
+  #0b2c68 0%,
+  #050816 45%,
+  #02040c 100%);
+
   color:white;
+
   min-height:100vh;
+
   padding:20px;
+
 }
 
 /* ===== CONTAINER ===== */
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
 }
 
 /* ===== HEADER ===== */
 .topo{
+
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   margin-bottom:30px;
+
 }
 
 .logoArea{
+
   display:flex;
   align-items:center;
   gap:15px;
+
 }
 
 .logoArea i{
+
   font-size:45px;
   color:#1cff72;
+
 }
 
 .logoArea h1{
+
   font-size:38px;
   font-weight:700;
+
 }
 
 .logoArea span{
@@ -53,100 +71,153 @@ body{
 }
 
 .logoArea p{
+
   color:#aeb7d0;
   margin-top:-5px;
+
 }
 
-/* ===== BOTÃO SAIR ===== */
-.logout{
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.2);
-  color:#ff5d5d;
-  padding:15px 30px;
-  border-radius:50px;
-  cursor:pointer;
-  font-size:18px;
-  transition:0.3s;
-}
+/* ===== LOGIN ===== */
+#login{
 
-.logout:hover{
-  background:#ff5d5d;
-  color:white;
+  max-width:500px;
+  margin:40px auto;
+
 }
 
 /* ===== CARDS ===== */
 .cards{
+
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
   gap:20px;
+
   margin-bottom:30px;
+
 }
 
 .card{
-  border-radius:25px;
-  padding:25px;
+
+  border-radius:28px;
+
+  padding:30px;
+
+  background:
+  rgba(4,10,25,0.65);
+
   backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 0 25px rgba(0,0,0,0.3);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+  0 0 30px rgba(0,0,0,0.35);
+
 }
 
 .card i{
-  font-size:25px;
-  margin-bottom:20px;
+
+  font-size:26px;
+
+  margin-bottom:18px;
+
 }
 
 .card h3{
-  font-size:20px;
+
+  font-size:18px;
+
   color:#dbe3ff;
-  margin-bottom:15px;
+
+  margin-bottom:12px;
+
 }
 
 .card h2{
-  font-size:42px;
+
+  font-size:40px;
+
   margin-bottom:5px;
+
 }
 
 .card p{
   color:#b9c2da;
 }
 
-/* ===== CORES DOS CARDS ===== */
+/* ===== CORES ===== */
 .verde{
-  background:linear-gradient(135deg,#063b2c,#0f7a52);
+
+  background:
+  linear-gradient(135deg,
+  #063b2c,
+  #0f7a52);
+
 }
 
 .azul{
-  background:linear-gradient(135deg,#123b88,#1853c6);
+
+  background:
+  linear-gradient(135deg,
+  #123b88,
+  #1853c6);
+
 }
 
 .roxo{
-  background:linear-gradient(135deg,#47218f,#7c3aed);
+
+  background:
+  linear-gradient(135deg,
+  #47218f,
+  #7c3aed);
+
 }
 
 /* ===== BOX ===== */
 .box{
-  background:rgba(4,10,25,0.65);
+
+  background:
+  rgba(4,10,25,0.65);
+
   border-radius:30px;
+
   padding:30px;
+
   margin-bottom:30px;
-  border:1px solid rgba(255,255,255,0.08);
-  box-shadow:0 0 30px rgba(0,0,0,0.4);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+  0 0 30px rgba(0,0,0,0.4);
+
 }
 
 /* ===== TITULOS ===== */
 .box h2{
+
   display:flex;
   align-items:center;
   gap:10px;
+
   margin-bottom:25px;
+
   font-size:32px;
+
 }
 
 /* ===== FORM ===== */
 .formGrid{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:20px;
+
 }
 
 .inputGroup{
@@ -154,93 +225,266 @@ body{
 }
 
 .inputGroup label{
+
   display:block;
+
   margin-bottom:10px;
+
   color:#cbd5e1;
+
   font-size:15px;
+
 }
 
+/* ===== INPUT ===== */
 .inputBox{
+
   display:flex;
+
   align-items:center;
+
   background:#071224;
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:15px;
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  border-radius:16px;
+
   overflow:hidden;
+
 }
 
 .inputBox span{
+
   background:#0a8f57;
+
   color:#77ffbf;
+
   padding:16px;
+
   font-weight:bold;
+
   font-size:18px;
+
 }
 
 input,
 select{
+
   width:100%;
+
   background:transparent;
+
   border:none;
+
   outline:none;
+
   padding:16px;
+
   color:white;
+
   font-size:16px;
+
+}
+
+input::placeholder{
+  color:#94a3b8;
 }
 
 select option{
   color:black;
 }
 
-/* ===== BOTÃO ===== */
-.salvar{
+/* ===== BOTÕES ===== */
+button{
+
   width:100%;
-  margin-top:25px;
-  background:linear-gradient(90deg,#18d46b,#19b95d);
+
   border:none;
-  padding:18px;
-  border-radius:18px;
-  color:white;
-  font-size:20px;
-  font-weight:700;
+
+  outline:none;
+
   cursor:pointer;
+
+  font-family:'Poppins', sans-serif;
+
+}
+
+/* ===== BOTÃO LOGIN ===== */
+.loginBtn{
+
+  margin-top:25px;
+
+  background:
+  linear-gradient(90deg,
+  #19d86b,
+  #13c45d);
+
+  color:white;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  font-size:20px;
+
+  font-weight:700;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
   transition:0.3s;
+
+  box-shadow:
+  0 0 20px rgba(25,216,107,0.25);
+
+}
+
+.loginBtn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 0 25px rgba(25,216,107,0.45);
+
+}
+
+.loginBtn i{
+  font-size:22px;
+}
+
+/* ===== BOTÃO SALVAR ===== */
+.salvar{
+
+  margin-top:25px;
+
+  background:
+  linear-gradient(90deg,
+  #19d86b,
+  #13c45d);
+
+  color:white;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  font-size:22px;
+
+  font-weight:700;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  transition:0.3s;
+
 }
 
 .salvar:hover{
+
   transform:translateY(-3px);
-  opacity:0.9;
+
+  opacity:0.92;
+
+  box-shadow:
+  0 0 20px rgba(25,216,107,0.4);
+
+}
+
+.salvar i{
+  font-size:24px;
+}
+
+/* ===== SAIR ===== */
+.logout{
+
+  background:transparent;
+
+  border:
+  1px solid rgba(255,255,255,0.2);
+
+  color:#ff5d5d;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  margin-top:20px;
+
+  font-size:18px;
+
+  transition:0.3s;
+
+}
+
+.logout:hover{
+
+  background:#ff5d5d;
+
+  color:white;
+
 }
 
 /* ===== HISTÓRICO ===== */
 .viagem{
+
   background:#071224;
+
   border-radius:25px;
+
   padding:25px;
+
   margin-top:20px;
-  border:1px solid rgba(255,255,255,0.06);
+
+  border:
+  1px solid rgba(255,255,255,0.06);
+
 }
 
 .viagemTop{
+
   display:flex;
+
   justify-content:space-between;
+
   gap:20px;
+
   flex-wrap:wrap;
+
 }
 
 .viagemInfo h3{
+
   font-size:28px;
+
   margin-bottom:10px;
+
 }
 
 .viagemInfo p{
+
   color:#cbd5e1;
+
   margin-bottom:6px;
+
 }
 
 .valores p{
+
   font-size:20px;
+
   margin-bottom:10px;
+
 }
 
 .azulTexto{
@@ -255,33 +499,47 @@ select option{
   color:#1cff72;
 }
 
-/* ===== BOTÕES ===== */
+/* ===== BOTÕES HISTÓRICO ===== */
 .botoes{
+
   display:flex;
+
   gap:15px;
+
   margin-top:20px;
+
 }
 
 .editar{
+
   flex:1;
+
   background:#2563eb;
-  border:none;
+
   padding:14px;
+
   border-radius:15px;
+
   color:white;
+
   font-weight:600;
-  cursor:pointer;
+
 }
 
 .excluir{
+
   flex:1;
+
   background:#dc2626;
-  border:none;
+
   padding:14px;
+
   border-radius:15px;
+
   color:white;
+
   font-weight:600;
-  cursor:pointer;
+
 }
 
 /* ===== RESPONSIVO ===== */
