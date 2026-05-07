@@ -245,3 +245,14 @@ function limparCampos() {
 
   document.getElementById("cidade").value = "";
 }
+// DATA AUTOMÁTICA BRASIL
+window.onload = () => {
+
+  const hoje = new Date();
+
+  const brasil = hoje.toLocaleDateString("en-CA", {
+    timeZone: "America/Sao_Paulo"
+  });
+
+  document.getElementById("data").value = brasil;
+};
