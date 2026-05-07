@@ -1,4 +1,7 @@
+// ======================================
 // FIREBASE
+// ======================================
+
 const firebaseConfig = {
 
   apiKey: "AIzaSyAfF2l99nBaB3xP-Aj2C0LEJE0-05lufi8",
@@ -15,14 +18,17 @@ const firebaseConfig = {
 
 };
 
-// INICIAR
+// INICIAR FIREBASE
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
 const db = firebase.firestore();
 
+// ======================================
 // LOGIN
+// ======================================
+
 function login() {
 
   const email =
@@ -55,7 +61,10 @@ function login() {
 
 }
 
+// ======================================
 // LOGOUT
+// ======================================
+
 function logout() {
 
   auth.signOut()
@@ -68,7 +77,10 @@ function logout() {
 
 }
 
+// ======================================
 // VERIFICAR LOGIN
+// ======================================
+
 auth.onAuthStateChanged((user) => {
 
   if (user) {
@@ -85,13 +97,19 @@ auth.onAuthStateChanged((user) => {
 
 });
 
-// DATA
+// ======================================
+// DATA AUTOMÁTICA
+// ======================================
+
 const hoje = new Date();
 
 document.getElementById("data").value =
 hoje.toISOString().split("T")[0];
 
-// SALVAR
+// ======================================
+// SALVAR VIAGEM
+// ======================================
+
 function salvar() {
 
   const user = auth.currentUser;
@@ -108,14 +126,16 @@ function salvar() {
   const data =
     document.getElementById("data").value;
 
+  // VALIDAÇÃO
   if (!cidade || !frete || !gasto) {
 
-    alert("Preencha tudo.");
+    alert("Preencha todos os campos.");
 
     return;
 
   }
 
+  // SALVAR NO FIREBASE
   db.collection("viagens").add({
 
     uid: user.uid,
@@ -134,7 +154,7 @@ function salvar() {
 
   .then(() => {
 
-    carregarViagens();
+    alert("Viagem salva!");
 
     document.getElementById("cidade").value = "";
 
@@ -142,35 +162,24 @@ function salvar() {
 
     document.getElementById("gasto").value = "";
 
-  });
-
-}
-
-  db.collection("viagens").add({
-
-    cidade,
-    frete,
-    gasto,
-    data,
-    criadoEm: new Date()
+    carregarViagens();
 
   })
 
-  .then(() => {
+  .catch((error) => {
 
-    carregarViagens();
+    console.log(error);
 
-    document.getElementById("frete").value = "";
-
-    document.getElementById("gasto").value = "";
-
-    document.getElementById("cidade").value = "";
+    alert("Erro ao salvar.");
 
   });
 
 }
 
-// CARREGAR
+// ======================================
+// CARREGAR VIAGENS
+// ======================================
+
 function carregarViagens() {
 
   const lista =
@@ -187,8 +196,6 @@ function carregarViagens() {
   db.collection("viagens")
 
     .where("uid", "==", user.uid)
-
-    .orderBy("criadoEm", "desc")
 
     .get()
 
@@ -209,27 +216,58 @@ function carregarViagens() {
 
         <div class="viagem">
 
-          <h3>${v.cidade}</h3>
+          <div class="viagemTop">
 
-          <p>📅 ${v.data}</p>
+            <div class="viagemInfo">
 
-          <p>Frete: R$ ${v.frete}</p>
+              <h3>${v.cidade}</h3>
 
-          <p>Gasto: R$ ${v.gasto}</p>
+              <p>📅 ${v.data}</p>
 
-          <p>Lucro: R$ ${lucro}</p>
+            </div>
+
+            <div class="valores">
+
+              <p class="azulTexto">
+
+                Frete:
+                R$ ${v.frete.toFixed(2)}
+
+              </p>
+
+              <p class="vermelhoTexto">
+
+                Gasto:
+                R$ ${v.gasto.toFixed(2)}
+
+              </p>
+
+              <p class="verdeTexto">
+
+                Lucro:
+                R$ ${lucro.toFixed(2)}
+
+              </p>
+
+            </div>
+
+          </div>
 
           <div class="botoes">
 
             <button class="editar"
-              onclick="editarViagem('${doc.id}')">
+            onclick="editarViagem('${doc.id}')">
+
+              <i class="fa-solid fa-pen"></i>
 
               Editar
 
             </button>
 
             <button class="excluir"
-              onclick="excluirViagem('${doc.id}')">
+            onclick="excluirViagem('${doc.id}')">
+
+              <i class="fa-solid fa-trash"></i>
 
               Excluir
 
@@ -243,6 +281,7 @@ function carregarViagens() {
 
       });
 
+      // TOTAIS
       document.getElementById("totalFreteEl")
       .innerText = totalFrete.toFixed(2);
 
@@ -253,25 +292,26 @@ function carregarViagens() {
       .innerText =
       (totalFrete - totalGasto).toFixed(2);
 
-    });
+    })
 
-}
-      document.getElementById("totalFreteEl")
-      .innerText = totalFrete.toFixed(2);
+    .catch((error) => {
 
-      document.getElementById("totalGastoEl")
-      .innerText = totalGasto.toFixed(2);
-
-      document.getElementById("lucroEl")
-      .innerText =
-      (totalFrete - totalGasto).toFixed(2);
+      console.log(error);
 
     });
 
 }
 
+// ======================================
 // EXCLUIR
+// ======================================
+
 function excluirViagem(id) {
+
+  const confirmar =
+    confirm("Deseja excluir?");
+
+  if (!confirmar) return;
 
   db.collection("viagens")
 
@@ -287,14 +327,23 @@ function excluirViagem(id) {
 
 }
 
+// ======================================
 // EDITAR
+// ======================================
+
 function editarViagem(id) {
 
-  const frete =
-    prompt("Novo frete:");
+  const novoFrete =
+    prompt("Novo valor do frete:");
 
-  const gasto =
-    prompt("Novo gasto:");
+  const novoGasto =
+    prompt("Novo valor do gasto:");
+
+  if (!novoFrete || !novoGasto) {
+
+    return;
+
+  }
 
   db.collection("viagens")
 
@@ -302,9 +351,9 @@ function editarViagem(id) {
 
     .update({
 
-      frete: Number(frete),
+      frete: Number(novoFrete),
 
-      gasto: Number(gasto)
+      gasto: Number(novoGasto)
 
     })
 
