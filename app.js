@@ -2,7 +2,7 @@
 // FIREBASE
 // ======================================
 
- const firebaseConfig = {
+const firebaseConfig = {
 
   apiKey: "AIzaSyAfF2l99nBaB3xP-Aj2C0LEJE0-05lufi8",
 
@@ -26,6 +26,24 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // ======================================
+// MODAL
+// ======================================
+
+function mostrarModal() {
+
+  document.getElementById("modal")
+  .style.display = "flex";
+
+}
+
+function fecharModal() {
+
+  document.getElementById("modal")
+  .style.display = "none";
+
+}
+
+// ======================================
 // LOGIN
 // ======================================
 
@@ -46,6 +64,8 @@ function login() {
 
       document.getElementById("app")
       .style.display = "block";
+
+      carregarViagens();
 
     })
 
@@ -105,24 +125,6 @@ document.getElementById("data").value =
 hoje.toISOString().split("T")[0];
 
 // ======================================
-// MODAL
-// ======================================
-
-function mostrarModal() {
-
-  document.getElementById("modal")
-  .style.display = "flex";
-
-}
-
-function fecharModal() {
-
-  document.getElementById("modal")
-  .style.display = "none";
-
-}
-
-// ======================================
 // SALVAR VIAGEM
 // ======================================
 
@@ -151,7 +153,7 @@ function salvar() {
 
   }
 
-  // SALVAR NO FIREBASE
+  // SALVAR
   db.collection("viagens").add({
 
     uid: user.uid,
@@ -170,17 +172,18 @@ function salvar() {
 
   .then(() => {
 
-  mostrarModal();
+    mostrarModal();
 
-  document.getElementById("cidade").value = "";
+    document.getElementById("cidade").value = "";
 
-  document.getElementById("frete").value = "";
+    document.getElementById("frete").value = "";
 
-  document.getElementById("gasto").value = "";
+    document.getElementById("gasto").value = "";
 
-  carregarViagens();
+    carregarViagens();
 
-})
+  })
+
   .catch((error) => {
 
     console.log(error);
@@ -244,18 +247,15 @@ function carregarViagens() {
             <div class="valores">
 
               <p class="azulTexto">
-                Frete:
-                R$ ${v.frete.toFixed(2)}
+                Frete: R$ ${v.frete.toFixed(2)}
               </p>
 
               <p class="vermelhoTexto">
-                Gasto:
-                R$ ${v.gasto.toFixed(2)}
+                Gasto: R$ ${v.gasto.toFixed(2)}
               </p>
 
               <p class="verdeTexto">
-                Lucro:
-                R$ ${lucro.toFixed(2)}
+                Lucro: R$ ${lucro.toFixed(2)}
               </p>
 
             </div>
@@ -267,16 +267,12 @@ function carregarViagens() {
             <button class="editar"
             onclick="editarViagem('${doc.id}')">
 
-              <i class="fa-solid fa-pen"></i>
-
               Editar
 
             </button>
 
             <button class="excluir"
             onclick="excluirViagem('${doc.id}')">
-
-              <i class="fa-solid fa-trash"></i>
 
               Excluir
 
@@ -300,12 +296,6 @@ function carregarViagens() {
       document.getElementById("lucroEl")
       .innerText =
       (totalFrete - totalGasto).toFixed(2);
-
-    })
-
-    .catch((error) => {
-
-      console.log(error);
 
     });
 
