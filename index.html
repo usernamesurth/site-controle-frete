@@ -92,6 +92,149 @@
 
     </div>
 
+    <!-- CARDS -->
+    <div class="cards">
+
+      <!-- LUCRO -->
+      <div class="card verde">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <h3>LUCRO TOTAL</h3>
+
+        <h2>
+          R$
+          <span id="lucroEl">0</span>
+        </h2>
+
+        <p>Total líquido</p>
+
+      </div>
+
+      <!-- FRETE -->
+      <div class="card azul">
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+        <h3>TOTAL FRETE</h3>
+
+        <h2>
+          R$
+          <span id="totalFreteEl">0</span>
+        </h2>
+
+        <p>Valor bruto</p>
+
+      </div>
+
+      <!-- GASTOS -->
+      <div class="card roxo">
+
+        <i class="fa-solid fa-gas-pump"></i>
+
+        <h3>TOTAL GASTO</h3>
+
+        <h2>
+          R$
+          <span id="totalGastoEl">0</span>
+        </h2>
+
+        <p>Despesas totais</p>
+
+      </div>
+
+    </div>
+
+    <!-- NOVA VIAGEM -->
+    <div class="box">
+
+      <h2>
+        <i class="fa-solid fa-circle-plus"></i>
+        ADICIONAR VIAGEM
+      </h2>
+
+      <div class="formGrid">
+
+        <!-- DATA -->
+        <div class="inputGroup">
+
+          <label>
+            <i class="fa-solid fa-calendar-days"></i>
+            DATA DA VIAGEM
+          </label>
+
+          <input type="date"
+                 id="data">
+
+        </div>
+
+        <!-- CIDADE -->
+        <div class="inputGroup">
+
+          <label>
+            <i class="fa-solid fa-location-dot"></i>
+            CIDADE / ROTA
+          </label>
+
+          <input type="text"
+                 id="cidade"
+                 placeholder="Digite a cidade">
+
+        </div>
+
+        <!-- FRETE -->
+        <div class="inputGroup">
+
+          <label>
+            <i class="fa-solid fa-money-bill-wave"></i>
+            VALOR DO FRETE
+          </label>
+
+          <div class="inputBox">
+
+            <span>R$</span>
+
+            <input type="number"
+                   id="frete"
+                   placeholder="0,00">
+
+          </div>
+
+        </div>
+
+        <!-- GASTO -->
+        <div class="inputGroup">
+
+          <label>
+            <i class="fa-solid fa-gas-pump"></i>
+            COMBUSTÍVEL
+          </label>
+
+          <div class="inputBox">
+
+            <span>R$</span>
+
+            <input type="number"
+                   id="gasto"
+                   placeholder="0,00">
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BOTÃO SALVAR -->
+      <button onclick="salvar()"
+              class="salvar">
+
+        <i class="fa-solid fa-circle-plus"></i>
+        SALVAR VIAGEM
+
+      </button>
+
+    </div>
+
     <!-- HISTÓRICO -->
     <div class="box">
 
@@ -100,7 +243,6 @@
         VIAGENS SALVAS
       </h2>
 
-      <!-- LISTA -->
       <ul id="lista"></ul>
 
     </div>
@@ -141,7 +283,6 @@
 
     <div class="modal-buttons">
 
-      <!-- EXCLUIR -->
       <button class="btn-delete"
               onclick="confirmarExclusao()">
 
@@ -149,7 +290,6 @@
 
       </button>
 
-      <!-- CANCELAR -->
       <button class="btn-cancel"
               onclick="fecharModalExcluir()">
 
@@ -176,39 +316,35 @@
 <!-- SCRIPT MODAL -->
 <script>
 
-  let viagemId = null;
+let viagemId = null;
 
-  /* ABRIR MODAL */
-  function abrirModalExcluir(id) {
+/* ABRIR MODAL */
+function abrirModalExcluir(id) {
 
-    viagemId = id;
+  viagemId = id;
 
-    document.getElementById("modalExcluir").style.display = "flex";
+  document.getElementById("modalExcluir").style.display = "flex";
+}
+
+/* FECHAR MODAL */
+function fecharModalExcluir() {
+
+  document.getElementById("modalExcluir").style.display = "none";
+}
+
+/* CONFIRMAR EXCLUSÃO */
+function confirmarExclusao() {
+
+  const item = document.querySelector(`[data-id="${viagemId}"]`);
+
+  if(item){
+    item.remove();
   }
 
-  /* FECHAR MODAL */
-  function fecharModalExcluir() {
+  fecharModalExcluir();
 
-    document.getElementById("modalExcluir").style.display = "none";
-  }
-
-  /* CONFIRMAR EXCLUSÃO */
-  function confirmarExclusao() {
-
-    // PROCURA ITEM
-    const item = document.querySelector(`[data-id="${viagemId}"]`);
-
-    // REMOVE DA TELA
-    if (item) {
-      item.remove();
-    }
-
-    // FECHA MODAL
-    fecharModalExcluir();
-
-    // ALERTA
-    alert("Viagem excluída com sucesso!");
-  }
+  alert("Viagem excluída com sucesso!");
+}
 
 </script>
 
