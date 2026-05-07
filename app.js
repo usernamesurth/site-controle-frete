@@ -63,12 +63,13 @@ function login() {
 
     .catch((error) => {
 
-      alert("Erro ao entrar.");
-
       console.log(error);
+
+      alert(error.message);
 
     });
 
+}
 }
 
 // ===============================
