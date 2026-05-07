@@ -363,3 +363,11 @@ function editarViagem(id) {
 }
 
 console.log("APP FUNCIONANDO");
+
+function mostrarModal() {
+  document.getElementById("modal").style.display = "flex";
+}
+
+function fecharModal() {
+  document.getElementById("modal").style.display = "none";
+}
