@@ -168,21 +168,17 @@ function salvar() {
 
   .then(() => {
 
-    // ABRIR MODAL
-    mostrarModal();
+  mostrarModal();
 
-    // LIMPAR CAMPOS
-    document.getElementById("cidade").value = "";
+  document.getElementById("cidade").value = "";
 
-    document.getElementById("frete").value = "";
+  document.getElementById("frete").value = "";
 
-    document.getElementById("gasto").value = "";
+  document.getElementById("gasto").value = "";
 
-    // RECARREGAR VIAGENS
-    carregarViagens();
+  carregarViagens();
 
-  })
-
+})
   .catch((error) => {
 
     console.log(error);
