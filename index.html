@@ -388,6 +388,39 @@
   </div>
 </div>
 
+<!-- MODAL EDITAR -->
+<div id="modalEditar" class="modal-overlay-editar">
+  <div class="modal-editar-content">
+    <h2><i class="fa-solid fa-pen-to-square"></i> Editar Viagem</h2>
+    <div class="editar-form">
+      <div class="inputGroup">
+        <label>
+          <i class="fa-solid fa-money-bill-wave"></i>
+          NOVO VALOR DO FRETE
+        </label>
+        <div class="inputBox">
+          <span>R$</span>
+          <input type="number" id="editarFrete" placeholder="0,00">
+        </div>
+      </div>
+      <div class="inputGroup">
+        <label>
+          <i class="fa-solid fa-gas-pump"></i>
+          NOVO VALOR DO GASTO
+        </label>
+        <div class="inputBox">
+          <span>R$</span>
+          <input type="number" id="editarGasto" placeholder="0,00">
+        </div>
+      </div>
+    </div>
+    <div class="botoes-editar">
+      <button class="btn-salvar-edicao" id="btnSalvarEdicao">Salvar</button>
+      <button class="btn-cancelar-edicao" onclick="fecharModalEditar()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 
