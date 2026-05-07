@@ -7,18 +7,38 @@ const firebaseConfig = {
   messagingSenderId: "900483850217",
   appId: "1:900483850217:web:1b83a89ceac9747fbab578",
   measurementId: "G-RH831V3DQX"
+
+// ===============================
+// FIREBASE
+// ===============================
+
+const firebaseConfig = {
+
+  apiKey: "SUA_API_KEY",
+
+  authDomain: "SEU_AUTH_DOMAIN",
+
+  projectId: "SEU_PROJECT_ID",
+
+  storageBucket: "SEU_STORAGE_BUCKET",
+
+  messagingSenderId: "SEU_MESSAGING_ID",
+
+  appId: "SEU_APP_ID"
+
 };
 
 // INICIAR FIREBASE
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+
 const db = firebase.firestore();
 
-let userAtual = null;
-let editandoId = null;
-
+// ===============================
 // LOGIN
+// ===============================
+
 function login() {
 
   const email =
@@ -28,263 +48,343 @@ function login() {
     document.getElementById("pass").value;
 
   auth.signInWithEmailAndPassword(email, senha)
-    .catch(error => {
-      alert(error.message);
-    });
-}
 
-// CRIAR CONTA
-function registrar() {
-
-  const email =
-    document.getElementById("user").value;
-
-  const senha =
-    document.getElementById("pass").value;
-
-  auth.createUserWithEmailAndPassword(email, senha)
     .then(() => {
-      alert("Conta criada!");
+
+      document.getElementById("login")
+      .style.display = "none";
+
+      document.getElementById("app")
+      .style.display = "block";
+
+      carregarViagens();
+
     })
-    .catch(error => {
-      alert(error.message);
+
+    .catch((error) => {
+
+      alert("Erro ao entrar.");
+
+      console.log(error);
+
     });
+
 }
 
-// SAIR
+// ===============================
+// LOGOUT
+// ===============================
+
 function logout() {
-  auth.signOut();
+
+  auth.signOut()
+
+    .then(() => {
+
+      location.reload();
+
+    });
+
 }
 
-// MONITORAR LOGIN
-auth.onAuthStateChanged(user => {
+// ===============================
+// VERIFICAR LOGIN
+// ===============================
+
+auth.onAuthStateChanged((user) => {
 
   if (user) {
 
-    userAtual = user;
-
     document.getElementById("login")
-      .style.display = "none";
+    .style.display = "none";
 
     document.getElementById("app")
-      .style.display = "block";
+    .style.display = "block";
 
-    carregarDados();
+    carregarViagens();
 
-  } else {
-
-    document.getElementById("login")
-      .style.display = "block";
-
-    document.getElementById("app")
-      .style.display = "none";
   }
+
 });
 
-// SALVAR
+// ===============================
+// DATA BRASIL
+// ===============================
+
+const hoje = new Date();
+
+const dataBrasil =
+  hoje.toLocaleDateString("en-CA", {
+
+    timeZone:
+    "America/Sao_Paulo"
+
+  });
+
+document.getElementById("data")
+.value = dataBrasil;
+
+// ===============================
+// SALVAR VIAGEM
+// ===============================
+
 function salvar() {
-
-  const frete =
-    parseFloat(
-      document.getElementById("frete").value
-    );
-
-  const gasto =
-    parseFloat(
-      document.getElementById("gasto").value
-    );
-
-  const data =
-    document.getElementById("data").value;
 
   const cidade =
     document.getElementById("cidade").value;
 
-  if (!frete || !gasto || !data || !cidade) {
+  const frete =
+    Number(document.getElementById("frete").value);
 
-    alert("Preencha tudo");
+  const gasto =
+    Number(document.getElementById("gasto").value);
+
+  const data =
+    document.getElementById("data").value;
+
+  // VALIDAÇÃO
+  if (!cidade || !frete || !gasto) {
+
+    alert("Preencha todos os campos.");
 
     return;
+
   }
 
-  const viagem = {
-    uid: userAtual.uid,
-    frete,
-    gasto,
-    data,
-    cidade
-  };
+  // SALVAR FIREBASE
+  db.collection("viagens").add({
 
-  if (editandoId) {
+    cidade: cidade,
 
-    db.collection("viagens")
-      .doc(editandoId)
-      .update(viagem);
+    frete: frete,
 
-    editandoId = null;
+    gasto: gasto,
 
-  } else {
+    data: data,
 
-    db.collection("viagens")
-      .add(viagem);
-  }
+    criadoEm: new Date()
 
-  limparCampos();
+  })
+
+  .then(() => {
+
+    alert("Viagem salva!");
+
+    // LIMPAR CAMPOS
+    document.getElementById("cidade").value = "";
+
+    document.getElementById("frete").value = "";
+
+    document.getElementById("gasto").value = "";
+
+    carregarViagens();
+
+  })
+
+  .catch((error) => {
+
+    console.log(error);
+
+    alert("Erro ao salvar.");
+
+  });
+
 }
 
-// CARREGAR
-function carregarDados() {
+// ===============================
+// CARREGAR VIAGENS
+// ===============================
+
+function carregarViagens() {
+
+  const lista =
+    document.getElementById("lista");
+
+  lista.innerHTML = "";
+
+  let totalFrete = 0;
+
+  let totalGasto = 0;
 
   db.collection("viagens")
-    .where("uid", "==", userAtual.uid)
-    .onSnapshot(snapshot => {
 
-      let totalFrete = 0;
+    .orderBy("criadoEm", "desc")
 
-      let totalGasto = 0;
+    .get()
 
-      const lista =
-        document.getElementById("lista");
+    .then((snapshot) => {
 
-      lista.innerHTML = "";
+      snapshot.forEach((doc) => {
 
-      snapshot.forEach(doc => {
+        const viagem = doc.data();
 
-        const v = doc.data();
+        const lucro =
+          viagem.frete - viagem.gasto;
 
-        totalFrete += v.frete;
+        totalFrete += viagem.frete;
 
-        totalGasto += v.gasto;
+        totalGasto += viagem.gasto;
 
-        const item =
-          document.createElement("li");
+        lista.innerHTML += `
 
-        item.innerHTML = `
-          📍 ${v.cidade}<br>
-          📅 ${v.data}<br>
-          🚛 R$${v.frete}<br>
-          ⛽ R$${v.gasto}<br><br>
+        <div class="viagem">
 
-          <button onclick="editar('${doc.id}')">
-            Editar
-          </button>
+          <div class="viagemTop">
 
-          <button onclick="excluir('${doc.id}')">
-            Excluir
-          </button>
+            <div class="viagemInfo">
+
+              <h3>
+
+                ${viagem.cidade}
+
+              </h3>
+
+              <p>
+
+                📅 ${viagem.data}
+
+              </p>
+
+            </div>
+
+            <div class="valores">
+
+              <p class="azulTexto">
+
+                Frete:
+                R$ ${viagem.frete.toFixed(2)}
+
+              </p>
+
+              <p class="vermelhoTexto">
+
+                Gasto:
+                R$ ${viagem.gasto.toFixed(2)}
+
+              </p>
+
+              <p class="verdeTexto">
+
+                Lucro:
+                R$ ${lucro.toFixed(2)}
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="botoes">
+
+            <button class="editar"
+              onclick="editarViagem('${doc.id}')">
+
+              <i class="fa-solid fa-pen"></i>
+
+              Editar
+
+            </button>
+
+            <button class="excluir"
+              onclick="excluirViagem('${doc.id}')">
+
+              <i class="fa-solid fa-trash"></i>
+
+              Excluir
+
+            </button>
+
+          </div>
+
+        </div>
+
         `;
 
-        lista.appendChild(item);
       });
 
-      const lucro =
+      // TOTAIS
+      const lucroTotal =
         totalFrete - totalGasto;
 
-      const metade =
-        lucro / 2;
+      document.getElementById(
+        "totalFreteEl"
+      ).innerText =
+        totalFrete.toFixed(2);
 
-      document.getElementById("totalFreteEl")
-        .innerText = totalFrete.toFixed(2);
+      document.getElementById(
+        "totalGastoEl"
+      ).innerText =
+        totalGasto.toFixed(2);
 
-      document.getElementById("totalGastoEl")
-        .innerText = totalGasto.toFixed(2);
+      document.getElementById(
+        "lucroEl"
+      ).innerText =
+        lucroTotal.toFixed(2);
 
-      document.getElementById("lucroEl")
-        .innerText = lucro.toFixed(2);
-
-      document.getElementById("metadeEl")
-        .innerText = metade.toFixed(2);
     });
+
 }
 
-// EDITAR
-function editar(id) {
+// ===============================
+// EXCLUIR
+// ===============================
+
+function excluirViagem(id) {
+
+  const confirmar =
+    confirm("Excluir viagem?");
+
+  if (!confirmar) return;
 
   db.collection("viagens")
+
     .doc(id)
-    .get()
-    .then(doc => {
 
-      const v = doc.data();
+    .delete()
 
-      document.getElementById("frete").value =
-        v.frete;
+    .then(() => {
 
-      document.getElementById("gasto").value =
-        v.gasto;
+      carregarViagens();
 
-      document.getElementById("data").value =
-        v.data;
-
-      document.getElementById("cidade").value =
-        v.cidade;
-
-      editandoId = id;
     });
+
 }
 
-// EXCLUIR
-function excluir(id) {
+// ===============================
+// EDITAR
+// ===============================
 
-  if (confirm("Excluir viagem?")) {
+function editarViagem(id) {
 
-    db.collection("viagens")
-      .doc(id)
-      .delete();
+  const novoFrete =
+    prompt("Novo valor do frete:");
+
+  const novoGasto =
+    prompt("Novo valor do gasto:");
+
+  if (!novoFrete || !novoGasto) {
+
+    return;
+
   }
+
+  db.collection("viagens")
+
+    .doc(id)
+
+    .update({
+
+      frete: Number(novoFrete),
+
+      gasto: Number(novoGasto)
+
+    })
+
+    .then(() => {
+
+      carregarViagens();
+
+    });
+
 }
 
-// LIMPAR
-function limparCampos() {
-
-  document.getElementById("frete").value = "";
-
-  document.getElementById("gasto").value = "";
-
-  document.getElementById("data").value = "";
-
-  document.getElementById("cidade").value = "";
-}
-// DATA AUTOMÁTICA BRASIL
-window.onload = () => {
-
-  const hoje = new Date();
-
-  const brasil = hoje.toLocaleDateString("en-CA", {
-    timeZone: "America/Sao_Paulo"
-  });
-
-  document.getElementById("data").value = brasil;
-};
-// VALIDAR CIDADE DA LISTA
-document.getElementById("cidade").addEventListener("change", function () {
-
-  const inputCidade = this.value;
-
-  const opcoes =
-    document.querySelectorAll("#cidadesMG option");
-
-  let valido = false;
-
-  opcoes.forEach(option => {
-
-    if (option.value === inputCidade) {
-      valido = true;
-    }
-  });
-
-  if (!valido) {
-
-    alert("Selecione uma cidade válida da lista.");
-
-    this.value = "";
-  }
-});
-
-  if (!valido) {
-
-    alert("Selecione uma cidade válida da lista.");
-
-    this.value = "";
-  }
-});
