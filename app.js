@@ -94,6 +94,8 @@ hoje.toISOString().split("T")[0];
 // SALVAR
 function salvar() {
 
+  const user = auth.currentUser;
+
   const cidade =
     document.getElementById("cidade").value;
 
@@ -113,6 +115,36 @@ function salvar() {
     return;
 
   }
+
+  db.collection("viagens").add({
+
+    uid: user.uid,
+
+    cidade: cidade,
+
+    frete: frete,
+
+    gasto: gasto,
+
+    data: data,
+
+    criadoEm: new Date()
+
+  })
+
+  .then(() => {
+
+    carregarViagens();
+
+    document.getElementById("cidade").value = "";
+
+    document.getElementById("frete").value = "";
+
+    document.getElementById("gasto").value = "";
+
+  });
+
+}
 
   db.collection("viagens").add({
 
@@ -150,7 +182,11 @@ function carregarViagens() {
 
   let totalGasto = 0;
 
+  const user = auth.currentUser;
+
   db.collection("viagens")
+
+    .where("uid", "==", user.uid)
 
     .orderBy("criadoEm", "desc")
 
@@ -185,13 +221,15 @@ function carregarViagens() {
 
           <div class="botoes">
 
-            <button onclick="editarViagem('${doc.id}')">
+            <button class="editar"
+              onclick="editarViagem('${doc.id}')">
 
               Editar
 
             </button>
 
-            <button onclick="excluirViagem('${doc.id}')">
+            <button class="excluir"
+              onclick="excluirViagem('${doc.id}')">
 
               Excluir
 
@@ -205,6 +243,19 @@ function carregarViagens() {
 
       });
 
+      document.getElementById("totalFreteEl")
+      .innerText = totalFrete.toFixed(2);
+
+      document.getElementById("totalGastoEl")
+      .innerText = totalGasto.toFixed(2);
+
+      document.getElementById("lucroEl")
+      .innerText =
+      (totalFrete - totalGasto).toFixed(2);
+
+    });
+
+}
       document.getElementById("totalFreteEl")
       .innerText = totalFrete.toFixed(2);
 
