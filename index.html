@@ -10,7 +10,7 @@
 
   <title>🚛 Gamarano's Frete</title>
 
-  <!-- ÍCONE DA ABA -->
+  <!-- ÍCONE ABA -->
   <link rel="icon"
         type="image/png"
         href="logo.png">
@@ -19,7 +19,7 @@
   <link rel="stylesheet"
         href="style.css">
 
-  <!-- FONT AWESOME -->
+  <!-- ÍCONES -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -33,230 +33,296 @@
   <div id="login" class="card">
 
     <h2>
+
       <i class="fa-solid fa-truck"></i>
+
       Controle de Frete
+
     </h2>
+
+    <br>
 
     <input type="email"
            id="user"
            placeholder="Email">
 
+    <br><br>
+
     <input type="password"
            id="pass"
            placeholder="Senha">
 
-    <button onclick="login()" class="loginBtn">
+    <!-- BOTÃO LOGIN -->
+    <button class="loginBtn"
+            onclick="login()">
 
-  <i class="fa-solid fa-right-to-bracket"></i>
+      <i class="fa-solid fa-right-to-bracket"></i>
 
-  Entrar
+      Entrar
 
-</button>
+    </button>
 
   </div>
 
   <!-- APP -->
   <div id="app" style="display:none;">
 
-    <h2>
+    <!-- TOPO -->
+    <div class="topo">
 
-      <i class="fa-solid fa-chart-line"></i>
+      <div class="logoArea">
 
-      Dashboard
+        <i class="fa-solid fa-truck-fast"></i>
 
-    </h2>
+        <div>
+
+          <h1>
+
+            MEU <span>CAMINHÃO</span>
+
+          </h1>
+
+          <p>Controle de Ganhos</p>
+
+        </div>
+
+      </div>
+
+      <!-- SAIR -->
+      <button onclick="logout()"
+              class="logout">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Sair
+
+      </button>
+
+    </div>
 
     <!-- CARDS -->
     <div class="cards">
 
-      <div class="card">
+      <!-- LUCRO -->
+      <div class="card verde">
 
-        <i class="fa-solid fa-money-bill-trend-up"></i>
+        <i class="fa-solid fa-wallet"></i>
 
-        <h3>Frete</h3>
+        <h3>LUCRO TOTAL</h3>
 
-        <p>
+        <h2>
+
           R$
-          <span id="totalFreteEl">0</span>
-        </p>
+          <span id="lucroEl">0</span>
+
+        </h2>
+
+        <p>Total líquido</p>
 
       </div>
 
-      <div class="card">
+      <!-- FRETE -->
+      <div class="card azul">
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+        <h3>TOTAL FRETE</h3>
+
+        <h2>
+
+          R$
+          <span id="totalFreteEl">0</span>
+
+        </h2>
+
+        <p>Valor bruto</p>
+
+      </div>
+
+      <!-- GASTOS -->
+      <div class="card roxo">
 
         <i class="fa-solid fa-gas-pump"></i>
 
-        <h3>Gastos</h3>
+        <h3>TOTAL GASTO</h3>
 
-        <p>
+        <h2>
+
           R$
           <span id="totalGastoEl">0</span>
-        </p>
 
-      </div>
+        </h2>
 
-      <div class="card destaque">
-
-        <i class="fa-solid fa-sack-dollar"></i>
-
-        <h3>Lucro</h3>
-
-        <p>
-          R$
-          <span id="lucroEl">0</span>
-        </p>
-
-      </div>
-
-      <div class="card destaque">
-
-        <i class="fa-solid fa-hand-holding-dollar"></i>
-
-        <h3>Seu 50%</h3>
-
-        <p>
-          R$
-          <span id="metadeEl">0</span>
-        </p>
+        <p>Despesas totais</p>
 
       </div>
 
     </div>
 
     <!-- NOVA VIAGEM -->
-    <div class="card">
+    <div class="box">
 
-      <h3>
+      <h2>
 
-        <i class="fa-solid fa-road"></i>
+        <i class="fa-solid fa-circle-plus"></i>
 
-        Nova Viagem
+        ADICIONAR VIAGEM
 
-      </h3>
+      </h2>
 
-      <!-- FRETE -->
-      <label>
+      <div class="formGrid">
 
-        <i class="fa-solid fa-money-bill-wave"></i>
+        <!-- DATA -->
+        <div class="inputGroup">
 
-        Valor do Frete
+          <label>
 
-      </label>
+            <i class="fa-solid fa-calendar-days"></i>
 
-      <div class="inputBox">
+            DATA DA VIAGEM
 
-        <span>R$</span>
+          </label>
 
-        <input type="number"
-               id="frete"
-               placeholder="0,00">
+          <input type="date"
+                 id="data"
+                 readonly>
+
+        </div>
+
+        <!-- PLACA -->
+        <div class="inputGroup">
+
+          <label>
+
+            <i class="fa-solid fa-truck"></i>
+
+            PLACA DO CAMINHÃO
+
+          </label>
+
+          <input type="text"
+                 id="placa"
+                 placeholder="Ex: ABC-1234">
+
+        </div>
+
+        <!-- CIDADE -->
+        <div class="inputGroup"
+             style="grid-column:1/3;">
+
+          <label>
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            CIDADE / ROTA
+
+          </label>
+
+          <select id="cidade">
+
+            <option value="">
+              Selecione a cidade - MG
+            </option>
+
+            <option>Belo Horizonte - MG</option>
+            <option>Uberlândia - MG</option>
+            <option>Contagem - MG</option>
+            <option>Juiz de Fora - MG</option>
+            <option>Betim - MG</option>
+            <option>Montes Claros - MG</option>
+            <option>Uberaba - MG</option>
+            <option>Governador Valadares - MG</option>
+            <option>Ipatinga - MG</option>
+            <option>Sete Lagoas - MG</option>
+            <option>Divinópolis - MG</option>
+            <option>Poços de Caldas - MG</option>
+            <option>Pouso Alegre - MG</option>
+            <option>Patos de Minas - MG</option>
+            <option>Barbacena - MG</option>
+            <option>Ouro Preto - MG</option>
+            <option>Mariana - MG</option>
+            <option>Conselheiro Lafaiete - MG</option>
+            <option>Lavras - MG</option>
+            <option>Varginha - MG</option>
+
+          </select>
+
+        </div>
+
+        <!-- FRETE -->
+        <div class="inputGroup">
+
+          <label>
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            VALOR DO FRETE
+
+          </label>
+
+          <div class="inputBox">
+
+            <span>R$</span>
+
+            <input type="number"
+                   id="frete"
+                   placeholder="0,00">
+
+          </div>
+
+        </div>
+
+        <!-- COMBUSTÍVEL -->
+        <div class="inputGroup">
+
+          <label>
+
+            <i class="fa-solid fa-gas-pump"></i>
+
+            COMBUSTÍVEL
+
+          </label>
+
+          <div class="inputBox">
+
+            <span>R$</span>
+
+            <input type="number"
+                   id="gasto"
+                   placeholder="0,00">
+
+          </div>
+
+        </div>
 
       </div>
-
-      <!-- COMBUSTÍVEL -->
-      <label>
-
-        <i class="fa-solid fa-gas-pump"></i>
-
-        Combustível
-
-      </label>
-
-      <div class="inputBox">
-
-        <span>R$</span>
-
-        <input type="number"
-               id="gasto"
-               placeholder="0,00">
-
-      </div>
-
-      <!-- DATA -->
-      <label>
-
-        <i class="fa-solid fa-calendar-days"></i>
-
-        Data
-
-      </label>
-
-      <input type="date"
-             id="data"
-             readonly>
-
-      <!-- CIDADE -->
-      <label>
-
-        <i class="fa-solid fa-location-dot"></i>
-
-        Cidade
-
-      </label>
-
-      <input list="cidadesMG"
-             id="cidade"
-             placeholder="Cidade">
-
-      <datalist id="cidadesMG">
-
-        <option value="Belo Horizonte - MG">
-        <option value="Uberlândia - MG">
-        <option value="Contagem - MG">
-        <option value="Juiz de Fora - MG">
-        <option value="Betim - MG">
-        <option value="Montes Claros - MG">
-        <option value="Uberaba - MG">
-        <option value="Governador Valadares - MG">
-        <option value="Ipatinga - MG">
-        <option value="Sete Lagoas - MG">
-        <option value="Divinópolis - MG">
-        <option value="Poços de Caldas - MG">
-        <option value="Pouso Alegre - MG">
-        <option value="Patos de Minas - MG">
-        <option value="Barbacena - MG">
-        <option value="Ouro Preto - MG">
-        <option value="Mariana - MG">
-        <option value="Conselheiro Lafaiete - MG">
-        <option value="Lavras - MG">
-        <option value="Varginha - MG">
-
-      </datalist>
 
       <!-- BOTÃO -->
-      <button onclick="salvar()">
+      <button onclick="salvar()"
+              class="salvar">
 
-        <i class="fa-solid fa-floppy-disk"></i>
+        <i class="fa-solid fa-circle-plus"></i>
 
-        Salvar Viagem
+        SALVAR VIAGEM
 
       </button>
 
     </div>
 
     <!-- HISTÓRICO -->
-    <div class="card">
+    <div class="box">
 
-      <h3>
+      <h2>
 
         <i class="fa-solid fa-clock-rotate-left"></i>
 
-        Histórico
+        VIAGENS SALVAS
 
-      </h3>
+      </h2>
 
       <ul id="lista"></ul>
 
     </div>
-
-    <!-- SAIR -->
-    <button onclick="logout()" class="logout">
-
-      <i class="fa-solid fa-right-from-bracket"></i>
-
-      Sair
-
-    </button>
 
   </div>
 
@@ -268,6 +334,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- APP -->
+<script src="app.js"></script>
 
 </body>
 </html>
