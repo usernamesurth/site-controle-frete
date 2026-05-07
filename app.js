@@ -8,25 +8,8 @@ const firebaseConfig = {
   appId: "1:900483850217:web:1b83a89ceac9747fbab578",
   measurementId: "G-RH831V3DQX"
 
-// ===============================
-// FIREBASE
-// ===============================
 
-const firebaseConfig = {
 
-  apiKey: "SUA_API_KEY",
-
-  authDomain: "SEU_AUTH_DOMAIN",
-
-  projectId: "SEU_PROJECT_ID",
-
-  storageBucket: "SEU_STORAGE_BUCKET",
-
-  messagingSenderId: "SEU_MESSAGING_ID",
-
-  appId: "SEU_APP_ID"
-
-};
 
 // INICIAR FIREBASE
 firebase.initializeApp(firebaseConfig);
