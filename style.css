@@ -408,25 +408,43 @@ button{
 /* ===== SAIR ===== */
 .logout{
 
-  background:transparent;
+  padding: 10px 18px;
 
-  border:
-  1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
 
-  color:#ff5d5d;
+  border-radius: 14px;
 
-  padding:16px;
+  background: rgba(255,255,255,0.03);
 
-  border-radius:18px;
+  color: #ff5b5b;
 
-  margin-top:20px;
+  font-size: 15px;
 
-  font-size:18px;
+  font-weight: bold;
 
-  transition:0.3s;
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: auto;
+
+  height: auto;
+
+  transition: 0.3s;
 
 }
 
+.logout:hover{
+
+  background: rgba(255,0,0,0.1);
+
+  transform: scale(1.03);
+
+}
 .logout:hover{
 
   background:#ff5d5d;
