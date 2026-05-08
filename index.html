@@ -48,7 +48,6 @@
            id="pass"
            placeholder="Senha">
 
-    <!-- BOTÃO LOGIN -->
     <button type="button"
             class="loginBtn"
             onclick="login()">
@@ -85,18 +84,29 @@
 
       </div>
 
-      <!-- SAIR -->
+      <div class="usuarioArea">
 
-      <div class="usuario">
+        <div class="usuario">
 
-  <i class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-user"></i>
 
-  <span id="nomeUsuario">
-    Motorista
-  </span>
+          <span id="nomeUsuario">
+            Motorista
+          </span>
 
-</div>
-      
+        </div>
+
+        <a href="relatorios.html"
+           class="btnRelatorio inline">
+
+          <i class="fa-solid fa-chart-line"></i>
+
+          Ver Relatórios do Ano
+
+        </a>
+
+      </div>
+
       <button onclick="logout()"
               class="logout">
 
@@ -116,7 +126,7 @@
 
         <i class="fa-solid fa-wallet"></i>
 
-        <h3>LUCRO TOTAL</h3>
+        <h3>LUCRO DO MÊS</h3>
 
         <h2>
 
@@ -125,7 +135,24 @@
 
         </h2>
 
-        <p>Total líquido</p>
+        <p>Total líquido do mês</p>
+
+      </div>
+
+      <!-- VIAGENS -->
+      <div class="card amarelo">
+
+        <i class="fa-solid fa-road"></i>
+
+        <h3>VIAGENS DO MÊS</h3>
+
+        <h2>
+
+          <span id="totalViagensEl">0</span>
+
+        </h2>
+
+        <p>Quantidade de viagens</p>
 
       </div>
 
@@ -134,7 +161,7 @@
 
         <i class="fa-solid fa-arrow-trend-up"></i>
 
-        <h3>TOTAL FRETE</h3>
+        <h3>FRETE DO MÊS</h3>
 
         <h2>
 
@@ -143,7 +170,7 @@
 
         </h2>
 
-        <p>Valor bruto</p>
+        <p>Valor bruto do mês</p>
 
       </div>
 
@@ -214,85 +241,26 @@
               Selecione a cidade - MG
             </option>
 
-            <option value="Belo Horizonte - MG">
-              Belo Horizonte - MG
-            </option>
-
-            <option value="Uberlândia - MG">
-              Uberlândia - MG
-            </option>
-
-            <option value="Contagem - MG">
-              Contagem - MG
-            </option>
-
-            <option value="Juiz de Fora - MG">
-              Juiz de Fora - MG
-            </option>
-
-            <option value="Betim - MG">
-              Betim - MG
-            </option>
-
-            <option value="Montes Claros - MG">
-              Montes Claros - MG
-            </option>
-
-            <option value="Uberaba - MG">
-              Uberaba - MG
-            </option>
-
-            <option value="Governador Valadares - MG">
-              Governador Valadares - MG
-            </option>
-
-            <option value="Ipatinga - MG">
-              Ipatinga - MG
-            </option>
-
-            <option value="Sete Lagoas - MG">
-              Sete Lagoas - MG
-            </option>
-
-            <option value="Divinópolis - MG">
-              Divinópolis - MG
-            </option>
-
-            <option value="Poços de Caldas - MG">
-              Poços de Caldas - MG
-            </option>
-
-            <option value="Pouso Alegre - MG">
-              Pouso Alegre - MG
-            </option>
-
-            <option value="Patos de Minas - MG">
-              Patos de Minas - MG
-            </option>
-
-            <option value="Barbacena - MG">
-              Barbacena - MG
-            </option>
-
-            <option value="Ouro Preto - MG">
-              Ouro Preto - MG
-            </option>
-
-            <option value="Mariana - MG">
-              Mariana - MG
-            </option>
-
-            <option value="Conselheiro Lafaiete - MG">
-              Conselheiro Lafaiete - MG
-            </option>
-
-            <option value="Lavras - MG">
-              Lavras - MG
-            </option>
-
-            <option value="Varginha - MG">
-              Varginha - MG
-            </option>
+            <option value="Belo Horizonte - MG">Belo Horizonte - MG</option>
+            <option value="Uberlândia - MG">Uberlândia - MG</option>
+            <option value="Contagem - MG">Contagem - MG</option>
+            <option value="Juiz de Fora - MG">Juiz de Fora - MG</option>
+            <option value="Betim - MG">Betim - MG</option>
+            <option value="Montes Claros - MG">Montes Claros - MG</option>
+            <option value="Uberaba - MG">Uberaba - MG</option>
+            <option value="Governador Valadares - MG">Governador Valadares - MG</option>
+            <option value="Ipatinga - MG">Ipatinga - MG</option>
+            <option value="Sete Lagoas - MG">Sete Lagoas - MG</option>
+            <option value="Divinópolis - MG">Divinópolis - MG</option>
+            <option value="Poços de Caldas - MG">Poços de Caldas - MG</option>
+            <option value="Pouso Alegre - MG">Pouso Alegre - MG</option>
+            <option value="Patos de Minas - MG">Patos de Minas - MG</option>
+            <option value="Barbacena - MG">Barbacena - MG</option>
+            <option value="Ouro Preto - MG">Ouro Preto - MG</option>
+            <option value="Mariana - MG">Mariana - MG</option>
+            <option value="Conselheiro Lafaiete - MG">Conselheiro Lafaiete - MG</option>
+            <option value="Lavras - MG">Lavras - MG</option>
+            <option value="Varginha - MG">Varginha - MG</option>
 
           </select>
 
@@ -362,11 +330,8 @@
     <div class="box">
 
       <h2>
-
         <i class="fa-solid fa-clock-rotate-left"></i>
-
         VIAGENS SALVAS
-
       </h2>
 
       <ul id="lista"></ul>
@@ -403,32 +368,73 @@
 <div id="modalEditar" class="modal-overlay-editar">
   <div class="modal-editar-content">
     <h2><i class="fa-solid fa-pen-to-square"></i> Editar Viagem</h2>
+
     <div class="editar-form">
+
       <div class="inputGroup">
+
         <label>
+
           <i class="fa-solid fa-money-bill-wave"></i>
+
           NOVO VALOR DO FRETE
+
         </label>
+
         <div class="inputBox">
+
           <span>R$</span>
-          <input type="number" id="editarFrete" placeholder="0,00">
+
+          <input type="number"
+                 id="editarFrete"
+                 placeholder="0,00">
+
         </div>
+
       </div>
+
       <div class="inputGroup">
+
         <label>
+
           <i class="fa-solid fa-gas-pump"></i>
+
           NOVO VALOR DO GASTO
+
         </label>
+
         <div class="inputBox">
+
           <span>R$</span>
-          <input type="number" id="editarGasto" placeholder="0,00">
+
+          <input type="number"
+                 id="editarGasto"
+                 placeholder="0,00">
+
         </div>
+
       </div>
+
     </div>
+
     <div class="botoes-editar">
-      <button class="btn-salvar-edicao" id="btnSalvarEdicao">Salvar</button>
-      <button class="btn-cancelar-edicao" onclick="fecharModalEditar()">Cancelar</button>
+
+      <button class="btn-salvar-edicao"
+              id="btnSalvarEdicao">
+
+        Salvar
+
+      </button>
+
+      <button class="btn-cancelar-edicao"
+              onclick="fecharModalEditar()">
+
+        Cancelar
+
+      </button>
+
     </div>
+
   </div>
 </div>
 
