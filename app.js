@@ -147,7 +147,12 @@ auth.onAuthStateChanged((user) => {
     .style.display = "block";
 
     carregarViagens();
+  
+    const nome =
+user.email.split("@")[0];
 
+document.getElementById("nomeUsuario")
+.innerText = nome;
   }
 
 });
