@@ -26,7 +26,7 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // ======================================
-// MODAL
+// MODAIS
 // ======================================
 
 function mostrarModal() {
@@ -69,6 +69,7 @@ function mostrarModalEditar(id) {
   .onclick = () => confirmarEdicao(id);
 
   document.getElementById("editarFrete").value = "";
+
   document.getElementById("editarGasto").value = "";
 
 }
@@ -96,13 +97,7 @@ function login() {
 
     .then(() => {
 
-      document.getElementById("login")
-      .style.display = "none";
-
-      document.getElementById("app")
-      .style.display = "block";
-
-      carregarViagens();
+      console.log("LOGIN OK");
 
     })
 
@@ -146,13 +141,15 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("app")
     .style.display = "block";
 
-    carregarViagens();
-  
+    // NOME USUÁRIO
     const nome =
-user.email.split("@")[0];
+      user.email.split("@")[0];
 
-document.getElementById("nomeUsuario")
-.innerText = nome;
+    document.getElementById("nomeUsuario")
+    .innerText = nome;
+
+    carregarViagens();
+
   }
 
 });
@@ -251,6 +248,15 @@ function carregarViagens() {
 
   let totalGasto = 0;
 
+  let totalViagens = 0;
+
+  // TOTAL DO MÊS ATUAL
+  let viagensMes = 0;
+
+  let freteMes = 0;
+
+  let gastoMes = 0;
+
   const user = auth.currentUser;
 
   db.collection("viagens")
@@ -268,9 +274,42 @@ function carregarViagens() {
         const lucro =
           v.frete - v.gasto;
 
-        totalFrete += v.frete;
+        // RELATÓRIO MENSAL
+        const hoje = new Date();
 
-        totalGasto += v.gasto;
+        const mesAtual =
+          hoje.getMonth() + 1;
+
+        const anoAtual =
+          hoje.getFullYear();
+
+        const dataViagem =
+          new Date(v.data);
+
+        const mesViagem =
+          dataViagem.getMonth() + 1;
+
+        const anoViagem =
+          dataViagem.getFullYear();
+
+        if (
+          mesAtual === mesViagem &&
+          anoAtual === anoViagem
+        ) {
+
+          viagensMes++;
+
+          totalViagens++;
+
+          totalFrete += v.frete;
+
+          totalGasto += v.gasto;
+
+          freteMes += v.frete;
+
+          gastoMes += v.gasto;
+
+        }
 
         lista.innerHTML += `
 
@@ -338,6 +377,15 @@ function carregarViagens() {
       document.getElementById("lucroEl")
       .innerText =
       (totalFrete - totalGasto).toFixed(2);
+
+      document.getElementById("totalViagensEl")
+      .innerText = totalViagens;
+
+    })
+
+    .catch((error) => {
+
+      console.log(error);
 
     });
 
@@ -420,3 +468,130 @@ function confirmarEdicao(id) {
 }
 
 console.log("APP FUNCIONANDO");
+
+function abrirRelatorios() {
+
+  const area =
+    document.getElementById("areaRelatorios");
+
+  const lista =
+    document.getElementById("listaRelatorios");
+
+  // MOSTRAR / ESCONDER
+  if(area.style.display === "block"){
+
+    area.style.display = "none";
+
+    return;
+
+  }
+
+  area.style.display = "block";
+
+  lista.innerHTML = "";
+
+  const user = auth.currentUser;
+
+  const meses = [
+
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"
+
+  ];
+
+  db.collection("viagens")
+
+    .where("uid","==",user.uid)
+
+    .get()
+
+    .then((snapshot)=>{
+
+      let dadosMes = {};
+
+      snapshot.forEach((doc)=>{
+
+        const v = doc.data();
+
+        const data =
+          new Date(v.data);
+
+        const mes =
+          data.getMonth();
+
+        if(!dadosMes[mes]){
+
+          dadosMes[mes] = {
+
+            viagens:0,
+            frete:0,
+            gasto:0
+
+          };
+
+        }
+
+        dadosMes[mes].viagens++;
+
+        dadosMes[mes].frete += v.frete;
+
+        dadosMes[mes].gasto += v.gasto;
+
+      });
+
+      for(let mes in dadosMes){
+
+        const d = dadosMes[mes];
+
+        const lucro =
+          d.frete - d.gasto;
+
+        lista.innerHTML += `
+
+        <div class="relatorioAno">
+
+          <h3>
+
+            ${meses[mes]}
+
+          </h3>
+
+          <p>
+            🚛 Viagens:
+            ${d.viagens}
+          </p>
+
+          <p>
+            💰 Fretes:
+            R$ ${d.frete.toFixed(2)}
+          </p>
+
+          <p>
+            ⛽ Gastos:
+            R$ ${d.gasto.toFixed(2)}
+          </p>
+
+          <p>
+            📈 Lucro:
+            R$ ${lucro.toFixed(2)}
+          </p>
+
+        </div>
+
+        `;
+
+      }
+
+    });
+
+}
