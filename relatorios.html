@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>📊 Relatórios | Gamarano's Frete</title>
+
+  <!-- ÍCONE -->
+  <link rel="icon"
+        type="image/png"
+        href="logo.png">
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+        href="style.css">
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- TOPO -->
+  <div class="topo">
+
+    <div class="logoArea">
+
+      <i class="fa-solid fa-chart-column"></i>
+
+      <div>
+
+        <h1>
+
+           RELATÓRIOS <span>ANUAIS</span>
+
+        </h1>
+
+        <p>Análise completa das viagens</p>
+
+      </div>
+
+    </div>
+
+    <a href="index.html"
+       class="logout">
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+      Voltar
+
+    </a>
+
+  </div>
+
+  <!-- RELATÓRIOS -->
+  <div class="box">
+
+    <h2>
+
+    
+
+    📊  RELATÓRIOS DO ANO
+
+    </h2>
+
+    <div id="listaRelatorios"></div>
+
+  </div>
+
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<script>
+
+// ======================================
+// FIREBASE
+// ======================================
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAfF2l99nBaB3xP-Aj2C0LEJE0-05lufi8",
+
+  authDomain: "teste-caminhao-5651f.firebaseapp.com",
+
+  projectId: "teste-caminhao-5651f",
+
+  storageBucket: "teste-caminhao-5651f.firebasestorage.app",
+
+  messagingSenderId: "900483850217",
+
+  appId: "1:900483850217:web:1b83a89ceac9747fbab578"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+const db = firebase.firestore();
+
+// ======================================
+// VERIFICAR LOGIN
+// ======================================
+
+auth.onAuthStateChanged((user) => {
+
+  if(user){
+
+    carregarRelatorios(user);
+
+  }else{
+
+    window.location.href = "index.html";
+
+  }
+
+});
+
+// ======================================
+// CARREGAR RELATÓRIOS
+// ======================================
+
+function carregarRelatorios(user){
+
+  const lista =
+    document.getElementById("listaRelatorios");
+
+  lista.innerHTML = "";
+
+  const meses = [
+
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"
+
+  ];
+
+  db.collection("viagens")
+
+    .where("uid","==",user.uid)
+
+    .get()
+
+    .then((snapshot)=>{
+
+      let dadosMes = {};
+
+      snapshot.forEach((doc)=>{
+
+        const v = doc.data();
+
+        const data =
+          new Date(v.data);
+
+        const mes =
+          data.getMonth();
+
+        if(!dadosMes[mes]){
+
+          dadosMes[mes] = {
+
+            viagens:0,
+            frete:0,
+            gasto:0
+
+          };
+
+        }
+
+        dadosMes[mes].viagens++;
+
+        dadosMes[mes].frete += v.frete;
+
+        dadosMes[mes].gasto += v.gasto;
+
+      });
+
+      for(let mes in dadosMes){
+
+        const d = dadosMes[mes];
+
+        const lucro =
+          d.frete - d.gasto;
+
+        lista.innerHTML += `
+
+        <div class="relatorioAno">
+
+          <h3>
+
+            ${meses[mes]}
+
+          </h3>
+
+          <p>
+            🚛 Viagens:
+            ${d.viagens}
+          </p>
+
+          <p>
+            💰 Fretes:
+            R$ ${d.frete.toFixed(2)}
+          </p>
+
+          <p>
+            ⛽ Gastos:
+            R$ ${d.gasto.toFixed(2)}
+          </p>
+
+          <p>
+            📈 Lucro:
+            R$ ${lucro.toFixed(2)}
+          </p>
+
+        </div>
+
+        `;
+
+      }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
