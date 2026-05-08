@@ -44,6 +44,12 @@ body{
 
 }
 
+.usuarioArea{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
 .logoArea{
 
   display:flex;
@@ -173,6 +179,15 @@ body{
   linear-gradient(135deg,
   #47218f,
   #7c3aed);
+
+}
+
+.amarelo{
+
+  background:
+  linear-gradient(135deg,
+  #a66d00,
+  #f2b600);
 
 }
 
@@ -911,5 +926,127 @@ button{
   color: #19e068;
 
   font-size: 22px;
+
+}
+.relatorioMensal{
+
+  margin-top: 30px;
+
+}
+
+.relatorioGrid{
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+
+  gap: 20px;
+
+  margin-top: 20px;
+
+}
+
+.relatorioCard{
+
+  background: rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  text-align: center;
+
+}
+
+.relatorioCard h3{
+
+  color: #aaa;
+
+  margin-bottom: 15px;
+
+  font-size: 18px;
+
+}
+
+.relatorioCard span{
+
+  font-size: 30px;
+
+  font-weight: bold;
+
+  color: white;
+
+}
+
+.destaqueRelatorio{
+
+  border: 1px solid #19e068;
+
+  box-shadow: 0 0 20px rgba(25,224,104,0.2);
+
+}
+
+.btnRelatorio{
+
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  background: linear-gradient(45deg,#2563eb,#1d4ed8);
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+.btnRelatorio:hover{
+
+  transform: scale(1.02);
+
+}
+
+.btnRelatorio.inline{
+  width: auto;
+  margin-top: 0;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+.relatorioAno{
+
+  background: rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  margin-top: 15px;
+
+}
+
+.relatorioAno h3{
+
+  margin-bottom: 10px;
+
+  color: #22c55e;
 
 }
