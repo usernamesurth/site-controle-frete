@@ -871,3 +871,27 @@ button{
 .btn-cancel:hover {
   background: #d6d6d6;
 }
+
+.usuario{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+}
+
+.usuario i{
+
+  color: #19e068;
+
+  font-size: 22px;
+
+}
